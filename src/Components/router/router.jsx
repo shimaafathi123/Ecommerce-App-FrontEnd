@@ -4,7 +4,6 @@ import PageNotFound from "../PageNotFound/PageNotFound"
 function Layout() {
     return (
       <>
-      
         <Outlet />
       </>
     );
