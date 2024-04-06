@@ -1,6 +1,7 @@
 import { Outlet, createBrowserRouter } from "react-router-dom"
 import ShoppingCart from "../cart/cart"
 import PageNotFound from "../PageNotFound/PageNotFound"
+import Navbar from "../Navbar/Navbar";
 function Layout() {
     return (
       <>
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
             {
               path:"*",
               element:<PageNotFound/>
+            },
+            {
+              path:"/home",
+              element:<Navbar/>
             }
           ],
     }
