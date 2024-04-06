@@ -1,41 +1,60 @@
-// eslint-disable-next-line no-unused-vars
-import React from "react";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import NavbarBootstrap from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
+import'./Navbar.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
 
-const Navbar = () => {
-    return (
-        <nav className="navbar">
-            <div className="logo">
-                <img src="logo.png" alt="Logo" />
-            </div>
-            <div className="categories-dropdown">
-                {/* Dropdown list for categories */}
-                <select>
-                    <option value="category1">Category 1</option>
-                    <option value="category2">Category 2</option>
-                    <option value="category3">Category 3</option>
-                </select>
-            </div>
-            <div className="search-bar">
-                {/* Search bar */}
-                <input type="text" placeholder="Search..." />
-                <button type="submit">Search</button>
-            </div>
-            <div className="user-actions">
-                <div className="sign-in">
-                    {/* Sign in button/link */}
-                    <button>Sign In</button>
-                </div>
-                <div className="favorite">
-                    {/* Favorite icon or link */}
-                    <button>Favorite</button>
-                </div>
-                <div className="cart">
-                    {/* Cart icon or link */}
-                    <button>Cart</button>
-                </div>
-            </div>
-        </nav>
-    );
+function CustomNavbar() {
+  return (
+    <NavbarBootstrap expand="lg" className="bg-body-tertiary fixed-top">
+    <Container>
+      <NavbarBootstrap.Brand href="#home" className="text-white">
+        FASHMART
+      </NavbarBootstrap.Brand>
+      <NavbarBootstrap.Toggle aria-controls="basic-navbar-nav" />
+      <NavbarBootstrap.Collapse id="basic-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link href="#home" className="text-white">Home</Nav.Link>
+          <Nav.Link href="#link" className="text-white">Sign in</Nav.Link>
+          <NavDropdown title="Categories" id="basic-nav-dropdown" className="text-white">
+            <NavDropdown.Item href="#action/3.1" className="text-white">Action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.2" className="text-white">
+              Another action
+            </NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.3" className="text-white">Something</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action/3.4" className="text-white">
+              Separated link
+            </NavDropdown.Item>
+          </NavDropdown>
+        </Nav>
+        <Form className="d-flex">
+          <FormControl
+            type="search"
+            placeholder="Search"
+            className="mr-2"
+            aria-label="Search"
+          />
+          <Button variant="outline-success">Search</Button>
+        </Form>
+        <Nav>
+          <Nav.Link href="#cart" className="text-white">
+            <FontAwesomeIcon icon={faShoppingCart} />
+          </Nav.Link>
+          <Nav.Link href="#wishlist" className="text-white">
+            <FontAwesomeIcon icon={faHeart} />
+          </Nav.Link>
+        </Nav>
+      </NavbarBootstrap.Collapse>
+    </Container>
+  </NavbarBootstrap>
+);
 }
 
-export default Navbar;
+
+export default CustomNavbar;
