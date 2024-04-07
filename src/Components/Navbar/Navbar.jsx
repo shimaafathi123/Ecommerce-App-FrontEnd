@@ -13,14 +13,23 @@ function CustomNavbar() {
   return (
     <NavbarBootstrap expand="lg" className="bg-body-tertiary fixed-top">
     <Container>
+<<<<<<< HEAD
       <NavbarBootstrap.Brand href="/home" className="text-white">
+=======
+      <NavbarBootstrap.Brand href="/" className="text-white">
+>>>>>>> f7ca6dc8b643ca34c715086e197b64003d40a5f4
         FASHMART
       </NavbarBootstrap.Brand>
       <NavbarBootstrap.Toggle aria-controls="basic-navbar-nav" />
       <NavbarBootstrap.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
+<<<<<<< HEAD
           <Nav.Link href="/home" className="text-white">Home</Nav.Link>
           <Nav.Link href="/login" className="text-white">Sign in</Nav.Link>
+=======
+          <Nav.Link href="/" className="text-white">Home</Nav.Link>
+          <Nav.Link href="#link" className="text-white">Sign in</Nav.Link>
+>>>>>>> f7ca6dc8b643ca34c715086e197b64003d40a5f4
           <NavDropdown title="Categories" id="basic-nav-dropdown" className="text-white">
             <NavDropdown.Item href="#action/3.1" className="text-white">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2" className="text-white">
