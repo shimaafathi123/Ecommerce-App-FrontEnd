@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardImage, MDBRipple } from 'mdb-react-ui-kit';
+import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
+import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';  
+import './productList.css';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
@@ -18,36 +20,71 @@ const ProductList = () => {
         fetchProducts();
     }, []);
 
-    const renderProducts = () => {
-        const rows = [];
+    const renderStarRating = (rating) => {
+        const stars = [];
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 !== 0;
 
-        products.forEach((product, index) => {
-            rows.push(
+        for (let i = 0; i < fullStars; i++) {
+            stars.push(<BsStarFill key={i} />);
+        }
+
+        if (hasHalfStar) {
+            stars.push(<BsStarHalf key="half" />);
+        }
+
+        const remainingStars = 5 - stars.length;
+        for (let i = 0; i < remainingStars; i++) {
+            stars.push(<BsStar key={`empty${i}`} />);
+        }
+
+        return stars;
+    };
+
+    const renderProducts = () => {
+        return products.map((product) => {
+            let quantityText = '';
+            let quantityClass = '';
+
+            if (product.quantity > 10) {
+                quantityText = 'Available';
+                quantityClass = 'available';
+            } else if (product.quantity > 0) {
+                quantityText = 'Low Stock';
+                quantityClass = 'low-stock';
+            } else {
+                quantityText = 'Out of Stock';
+                quantityClass = 'out-of-stock';
+            }
+
+            return (
                 <MDBCol key={product.id} xs={12} sm={6} md={4} lg={3}>
-                    <MDBCard className="h-100">
-                        <MDBRipple rippleColor="light" rippleTag="div" className="bg-image rounded hover-zoom">
-                            <MDBCardImage variant="top" src={product.image} alt={product.name} fluid style={{ maxHeight: '200px', objectFit: 'cover' }} />
-                        </MDBRipple>
-                        <MDBCardBody className="d-flex flex-column">
-                            <h5 className="card-title">{product.name}</h5>
-                            <p className="card-text">{product.description}</p>
-                            <p className="card-text">Price: {product.price}$</p>
-                            <p className="card-text">Rating: {product.rating}</p>
-                            <p className="card-text">Quantity: {product.quantity}</p>
-                        </MDBCardBody>
-                    </MDBCard>
+                    <div className="product-card">
+                        <div className={`product-image ${quantityClass}`}>
+                            <img src={product.image} alt={product.name} />
+                            <p className={`product-quantity ${quantityClass}`}>{quantityText}: {product.quantity}</p>
+                        </div>
+                        <div className="product-card-content">
+                            <h5 className="product-card-title">{product.name}</h5>
+                            <p className="product-card-description">{product.description}</p>
+                            <p className="product-card-price">Price: {product.price}$</p>
+                            <div className="product-card-rating">
+                                Rating: {renderStarRating(product.rating)}
+                            </div>
+                        </div>
+                    </div>
                 </MDBCol>
             );
         });
-
-        return rows;
     };
 
     return (
-        <MDBContainer fluid className="my-5 text-center">
-            <h1 className="text-center mb-4">Product List</h1>
-            <MDBRow className="g-4">{renderProducts()}</MDBRow>
-        </MDBContainer>
+        <div className="product-list-container">
+            <MDBContainer fluid className="my-5 text-center">
+                <h1 className="text-center mb-4">Welcome To FASHMART</h1>
+                <MDBRow className="g-4">{renderProducts()}</MDBRow>
+            </MDBContainer>
+        </div>
     );
 };
 
