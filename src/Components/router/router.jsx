@@ -1,7 +1,7 @@
 import { Outlet, createBrowserRouter } from "react-router-dom"
 import ShoppingCart from "../cart/cart"
 import PageNotFound from "../PageNotFound/PageNotFound"
-import CustomNavbar from "../Navbar/Navbar";
+import Home  from "../Home/Home";
 function Layout() {
     return (
       <>
@@ -9,38 +9,23 @@ function Layout() {
       </>
     );
   }
-
-export const router = createBrowserRouter([
+  export const router = createBrowserRouter([
     {
-       element: <Layout></Layout>,
-        children: [
-          /*  {
-              path: "/",
-              element: <Home />,
-            },
-            {
-              path:"/products/:productID",
-              element: <ProductDetails/>
-            },
-            {
-              path:"/register",
-              element: <Register/>
-            },
-            {
-              path:"/user",
-              element: <Profile/>         }
-            ,*/
-            {
-                path:"/cart",
-                element: <ShoppingCart/>         },
-            {
-              path:"*",
-              element:<PageNotFound/>
-            },
-            {
-              path:"/home",
-              element:<CustomNavbar/>
-            }
-          ],
-    }
-])
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />, 
+        },
+        {
+          path: "/cart",
+          element: <ShoppingCart />,
+        },
+        {
+          path: "*",
+          element: <PageNotFound />,
+        },
+      ],
+    },
+  ]);
+  
