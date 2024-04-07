@@ -15,15 +15,7 @@ function Layout() {
   }
   export const router = createBrowserRouter([
     {
-<<<<<<< HEAD
-       element: <Layout></Layout>,
-        children: [
-        
-            {
-                path:"/cart",
-                element: <ShoppingCart/>         
-              },
-=======
+
       element: <Layout />,
       children: [
         {
@@ -38,7 +30,6 @@ function Layout() {
           path:"/register",
           element: <Register/>         
         },
->>>>>>> f7ca6dc8b643ca34c715086e197b64003d40a5f4
 
         {
           path:"/login",
