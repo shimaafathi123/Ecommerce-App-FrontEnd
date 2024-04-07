@@ -1,6 +1,9 @@
 import { Outlet, createBrowserRouter } from "react-router-dom"
 import ShoppingCart from "../cart/cart"
 import PageNotFound from "../PageNotFound/PageNotFound"
+import Register from "../user/Register"
+import Login from "../user/Login"
+import Profile from "../user/Profile"
 function Layout() {
     return (
       <>
@@ -31,7 +34,23 @@ export const router = createBrowserRouter([
             ,*/
             {
                 path:"/cart",
-                element: <ShoppingCart/>         },
+                element: <ShoppingCart/>         
+              },
+
+              {
+                path:"/register",
+                element: <Register/>         
+              },
+
+              {
+                path:"/login",
+                element: <Login/>         
+              },
+              {
+                path:"/profile",
+                element: <Profile/>         
+              },
+                
             {
               path:"*",
               element:<PageNotFound/>
