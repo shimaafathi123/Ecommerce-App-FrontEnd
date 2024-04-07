@@ -30,5 +30,5 @@ const cartSlice = createSlice({
 });
 
 export const { fetchCartStart, fetchCartSuccess, fetchCartFailure, removeItemSuccess } = cartSlice.actions;
-
+export const { addCartItem } = cartSlice.actions;
 export default cartSlice.reducer;

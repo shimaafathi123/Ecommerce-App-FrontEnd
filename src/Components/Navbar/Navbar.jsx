@@ -13,14 +13,14 @@ function CustomNavbar() {
   return (
     <NavbarBootstrap expand="lg" className="bg-body-tertiary fixed-top">
     <Container>
-      <NavbarBootstrap.Brand href="#home" className="text-white">
+      <NavbarBootstrap.Brand href="/home" className="text-white">
         FASHMART
       </NavbarBootstrap.Brand>
       <NavbarBootstrap.Toggle aria-controls="basic-navbar-nav" />
       <NavbarBootstrap.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link href="#home" className="text-white">Home</Nav.Link>
-          <Nav.Link href="#link" className="text-white">Sign in</Nav.Link>
+          <Nav.Link href="/home" className="text-white">Home</Nav.Link>
+          <Nav.Link href="/login" className="text-white">Sign in</Nav.Link>
           <NavDropdown title="Categories" id="basic-nav-dropdown" className="text-white">
             <NavDropdown.Item href="#action/3.1" className="text-white">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2" className="text-white">
@@ -43,7 +43,7 @@ function CustomNavbar() {
           <Button variant="outline-success">Search</Button>
         </Form>
         <Nav>
-          <Nav.Link href="#cart" className="text-white">
+          <Nav.Link href="/cart" className="text-white">
             <FontAwesomeIcon icon={faShoppingCart} />
           </Nav.Link>
           <Nav.Link href="#wishlist" className="text-white">
