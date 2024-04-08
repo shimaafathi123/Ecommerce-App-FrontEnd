@@ -6,12 +6,21 @@ import './productList.css';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState({}); // Store categories as an object with ID as keys and name as values
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/products/');
-                setProducts(response.data);
+                const productResponse = await axios.get('http://127.0.0.1:8000/products/');
+                setProducts(productResponse.data);
+
+                // Fetch categories separately
+                const categoryResponse = await axios.get('http://127.0.0.1:8000/categories/');
+                const categoriesData = categoryResponse.data.reduce((acc, category) => {
+                    acc[category.id] = category.name;
+                    return acc;
+                }, {});
+                setCategories(categoriesData);
             } catch (error) {
                 console.error('Error fetching products:', error);
             }
@@ -41,6 +50,10 @@ const ProductList = () => {
         return stars;
     };
 
+    const getCategoryNameById = (categoryId) => {
+        return categories[categoryId] || 'Unknown Category';
+    };
+
     const renderProducts = () => {
         return products.map((product) => {
             let quantityText = '';
@@ -68,6 +81,7 @@ const ProductList = () => {
                             <h5 className="product-card-title">{product.name}</h5>
                             <p className="product-card-description">{product.description}</p>
                             <p className="product-card-price">Price: {product.price}$</p>
+                            <p className="product-card-category">Category: {getCategoryNameById(product.category)}</p> {/* Render category */}
                             <div className="product-card-rating">
                                 Rating: {renderStarRating(product.rating)}
                             </div>
