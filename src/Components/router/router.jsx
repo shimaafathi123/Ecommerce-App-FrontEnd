@@ -6,6 +6,8 @@ import Home  from "../Home/Home";
 import Register from "../user/Register"
 import Login from "../user/Login"
 import Profile from "../user/Profile"
+import Account from "../user/Account"
+import Logout from "../user/Logout"
 function Layout() {
     return (
       <>
@@ -37,7 +39,15 @@ function Layout() {
         },
         {
           path:"/profile",
+          element: <Account/>         
+        },
+        {
+          path:"/editAccount",
           element: <Profile/>         
+        },
+        {
+          path:"/logout",
+          element: <Logout/>         
         },
         {
           path: "*",
