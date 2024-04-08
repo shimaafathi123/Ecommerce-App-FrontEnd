@@ -2,16 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';  
-import './productList.css';
+import ProductList from '../ProductList/productList';
 
-const ProductList = () => {
+const CategoryProductList = ({ categoryId }) => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState({}); // Store categories as an object with ID as keys and name as values
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const productResponse = await axios.get('http://127.0.0.1:8000/products/');
+                let apiUrl = 'http://127.0.0.1:8000/products/';
+                if (categoryId) {
+                    apiUrl += `category/${categoryId}/`; // Include category ID in the URL path if categoryId is provided
+                }
+                const productResponse = await axios.get(apiUrl);
                 setProducts(productResponse.data);
 
                 // Fetch categories separately
@@ -27,7 +31,7 @@ const ProductList = () => {
         };
 
         fetchProducts();
-    }, []);
+    }, [categoryId]);
 
     const renderStarRating = (rating) => {
         const stars = [];
@@ -95,11 +99,11 @@ const ProductList = () => {
     return (
         <div className="product-list-container">
             <MDBContainer fluid className="my-5 text-center">
-                <h1 className="text-center mb-4">Welcome To FASHMART</h1>
+                <h1 className="text-center mb-4">Products</h1>
                 <MDBRow className="g-4">{renderProducts()}</MDBRow>
             </MDBContainer>
         </div>
     );
 };
 
-export default ProductList;
+export default CategoryProductList;

@@ -1,0 +1,14 @@
+.category-product-list-container {
+    margin-top: 60px; 
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-product-list-container h1 {
+    color: #e60023;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
