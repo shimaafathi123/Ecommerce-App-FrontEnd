@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
-
+ 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProfile, updateProfile } from '../../store/profileSlice';
 
@@ -183,7 +183,25 @@ const Profile = () => {
 
   return (
     <Container>
-      <h3>Edit Profile</h3>
+    <main className="" style={{ marginBottom: 100, marginTop: 50 }}>
+    <div className="container">
+      <section className="">
+        <div className="row d-flex justify-content-center">
+          <div className="col-xl-5 col-md-8">
+            <div className="card rounded-5">
+              <div className="card-body p-4">
+                <h3 className="text-center">edit your info</h3>
+                <br />
+                <div className="tab-content">
+                  <div
+                    className="tab-pane fade show active"
+                    id="pills-login"
+                    role="tabpanel"
+                    aria-labelledby="tab-login"
+                  >
+
+
+       
       {showAlert && (
         <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
           Please fix the errors before submitting the form.
@@ -191,14 +209,15 @@ const Profile = () => {
       )}
       <Form onSubmit={handleSubmit} encType="multipart/form-data">
       {/*image*/}
-      <Form.Group controlId="image">
+      <Form.Group className='mb-3' controlId="image">
       <Form.Label >Profile Image</Form.Label>
-      <Form.Control type="file" name="image"  onChange={handleImageChange} />  {/*accept = 'image/*' */}  
+      <Form.Control className='w-100' type="file" name="image"  onChange={handleImageChange} />  {/*accept = 'image/*' */}  
     </Form.Group>
         {/* Full Name */}
-        <Form.Group controlId="full_name">
+        <Form.Group className='mb-3' controlId="full_name">
           <Form.Label>Full Name</Form.Label>
           <Form.Control
+          className='w-100'
             type="text"
             name="full_name"
             value={formData.full_name}
@@ -210,9 +229,10 @@ const Profile = () => {
         </Form.Group>
 
         {/* Email */}
-        <Form.Group controlId="email">
+        <Form.Group className='mb-3' controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
+          className='w-100'
             type="email"
             name="email"
             value={formData.email}
@@ -223,9 +243,10 @@ const Profile = () => {
         </Form.Group>
 
         {/* Phone */}
-        <Form.Group controlId="phone">
+        <Form.Group className='mb-3' controlId="phone">
           <Form.Label>Phone</Form.Label>
           <Form.Control
+          className='w-100'
             type="text"
             name="phone"
             value={formData.phone}
@@ -236,9 +257,10 @@ const Profile = () => {
         </Form.Group>
 
         {/* About */}
-        <Form.Group controlId="about">
+        <Form.Group className='mb-3' controlId="about">
           <Form.Label>About</Form.Label>
           <Form.Control
+          className='w-100'
             as="textarea"
             name="about"
             value={formData.about}
@@ -249,9 +271,10 @@ const Profile = () => {
         </Form.Group>
 
         {/* Gender */}
-        <Form.Group controlId="gender">
+        <Form.Group className='mb-3' controlId="gender">
           <Form.Label>Gender</Form.Label>
           <Form.Control
+          className='w-100'
             as="select"
             name="gender"
             value={formData.gender}
@@ -266,9 +289,10 @@ const Profile = () => {
         </Form.Group>
 
         {/* Country */}
-        <Form.Group controlId="country">
+        <Form.Group className='mb-3' controlId="country">
           <Form.Label>Country</Form.Label>
           <Form.Control
+          className='w-100'
             type="text"
             name="country"
             value={formData.country}
@@ -279,9 +303,10 @@ const Profile = () => {
         </Form.Group>
 
         {/* City */}
-        <Form.Group controlId="city">
+        <Form.Group className='mb-3' controlId="city">
           <Form.Label>City</Form.Label>
           <Form.Control
+          className='w-100'
             type="text"
             name="city"
             value={formData.city}
@@ -292,9 +317,10 @@ const Profile = () => {
         </Form.Group>
 
         {/* State */}
-        <Form.Group controlId="state">
+        <Form.Group className='mb-3' controlId="state">
           <Form.Label>State</Form.Label>
           <Form.Control
+          className='w-100'
             type="text"
             name="state"
             value={formData.state}
@@ -305,9 +331,10 @@ const Profile = () => {
         </Form.Group>
 
         {/* Address */}
-        <Form.Group controlId="address">
+        <Form.Group className='mb-3' controlId="address">
           <Form.Label>Address</Form.Label>
           <Form.Control
+          className='w-100'
             type="text"
             name="address"
             value={formData.address}
@@ -319,9 +346,10 @@ const Profile = () => {
  
 
         {/* New Password */}
-        <Form.Group controlId="newPassword">
+        <Form.Group className='mb-3' controlId="newPassword">
           <Form.Label>New Password</Form.Label>
           <Form.Control
+          className='w-100'
             type="password"
             name="newPassword"
             value={formData.newPassword}
@@ -332,9 +360,10 @@ const Profile = () => {
         </Form.Group>
 
         {/* Confirm Password */}
-        <Form.Group controlId="confirmPassword">
+        <Form.Group className='mb-3' controlId="confirmPassword">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
+          className='w-100'
             type="password"
             name="confirmPassword"
             value={formData.confirmPassword}
@@ -348,6 +377,18 @@ const Profile = () => {
           {isSubmitting ? 'Submitting...' : 'Save Changes'}
         </Button>
       </Form>
+
+
+      </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+</div>
+</section>
+</div>
+</main>
     </Container>
   );
 }
