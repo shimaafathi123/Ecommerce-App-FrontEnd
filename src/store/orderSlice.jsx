@@ -24,17 +24,8 @@ export const orderSlice = createSlice({
         }
       });
     },
-
-    payOrderState(state, action) {
-      const id = action.payload;
-      state.order.forEach((order_item) => {
-        if (order_item.id === id) {
-          order_item.paid = true;
-        }
-      });
-    },
   },
 });
 
-export const { setOrder, cancelOrderState, payOrderState } = orderSlice.actions;
+export const { setOrder, cancelOrderState } = orderSlice.actions;
 export default orderSlice.reducer;
