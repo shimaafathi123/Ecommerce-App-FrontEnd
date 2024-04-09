@@ -7,7 +7,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import './Navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faHeart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; // Import the logout icon
 
 import Category from '../Category/category';
 
@@ -22,7 +22,7 @@ function CustomNavbar() {
         <NavbarBootstrap.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/" className="text-white">Home</Nav.Link>
-            <Nav.Link href="#link" className="text-white">Sign in</Nav.Link>
+            <Nav.Link href="/login" className="text-white">Sign in</Nav.Link>
             <Category />
           </Nav>
           <Form className="d-flex">
@@ -35,11 +35,14 @@ function CustomNavbar() {
             <Button variant="outline-success">Search</Button>
           </Form>
           <Nav>
-            <Nav.Link href="#cart" className="text-white">
+            <Nav.Link href="/cart" className="text-white">
               <FontAwesomeIcon icon={faShoppingCart} />
             </Nav.Link>
             <Nav.Link href="#wishlist" className="text-white">
               <FontAwesomeIcon icon={faHeart} />
+            </Nav.Link>
+            <Nav.Link href="/logout" className="text-white">
+              <FontAwesomeIcon icon={faSignOutAlt} /> {/* Logout icon */}
             </Nav.Link>
           </Nav>
         </NavbarBootstrap.Collapse>

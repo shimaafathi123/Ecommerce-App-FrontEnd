@@ -8,6 +8,7 @@ import Login from "../user/Login"
 import Profile from "../user/Profile"
 import Account from "../user/Account"
 import Logout from "../user/Logout"
+import ProductDetail from "../productDetail/productDetail";
 function Layout() {
     return (
       <>
@@ -53,6 +54,10 @@ function Layout() {
           path: "*",
           element: <PageNotFound />,
         },
+        {
+          path:"/products/:id",
+          element:<ProductDetail/>
+        }
       ],
     },
   ]);

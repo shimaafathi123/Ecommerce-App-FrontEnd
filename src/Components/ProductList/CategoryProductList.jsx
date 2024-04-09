@@ -5,6 +5,7 @@ import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 import ProductList from './productList';
 import './productList.css'
 import { FaHeart } from 'react-icons/fa';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const CategoryProductList = ({ categoryId }) => {
     const [products, setProducts] = useState([]);
@@ -78,25 +79,27 @@ const CategoryProductList = ({ categoryId }) => {
     
             return (
                 <MDBCol key={product.id} xs={12} sm={6} md={4} lg={3}>
-                    <div className="product-card">
-                        <div className={`product-image ${quantityClass}`}>
-                            <img src={product.image} alt={product.name} />
-                            <p className={`product-quantity ${quantityClass}`}>{quantityText}: {product.quantity}</p>
-                        </div>
-                        <div className="product-card-content">
-                            <h5 className="product-card-title">{product.name}</h5>
-                            <p className="product-card-description">{product.description}</p>
-                            <p className="product-card-price">Price: {product.price}$</p>
-                            <p className="product-card-category">Category: {getCategoryNameById(product.category)}</p>
-                            <div className="product-card-rating">
-                                Rating: {renderStarRating(product.rating)}
+                    <Link to={`/products/${product.id}`} className="product-link"> {/* Link to product detail page */}
+                        <div className="product-card">
+                            <div className={`product-image ${quantityClass}`}>
+                                <img src={product.image} alt={product.name} />
+                                <p className={`product-quantity ${quantityClass}`}>{quantityText}: {product.quantity}</p>
                             </div>
-                            <div className="product-card-buttons">
-                                <button className="btn btn-primary">Add to Cart</button>
-                                <button className="btn btn-secondary"><FaHeart /> Wishlist</button> {/* Replace text with heart icon */}
+                            <div className="product-card-content">
+                                <h5 className="product-card-title">{product.name}</h5>
+                                <p className="product-card-description">{product.description}</p>
+                                <p className="product-card-price">Price: {product.price}$</p>
+                                <p className="product-card-category">Category: {getCategoryNameById(product.category)}</p>
+                                <div className="product-card-rating">
+                                    Rating: {renderStarRating(product.rating)}
+                                </div>
+                                <div className="product-card-buttons">
+                                    <button className="btn btn-primary">Add to Cart</button>
+                                    <button className="btn btn-secondary"><FaHeart /> Wishlist</button> {/* Replace text with heart icon */}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </MDBCol>
             );
         });
