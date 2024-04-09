@@ -4,6 +4,9 @@ const initialState = {
   cart: null,
   loading: true,
   error: null,
+  amount: 0,
+  totalAmount: 0, 
+  totalPrice: 0, 
 };
 
 const cartSlice = createSlice({
@@ -25,10 +28,19 @@ const cartSlice = createSlice({
     removeItemSuccess(state, action) {
       state.cart = action.payload;
     },
+    setCart(state, action) {
+      state.cart = action.payload;
+      state.totalAmount = action.payload.length; // Update totalAmount
+      state.totalPrice = action.payload.reduce(
+        (total, item) => total + (item.quantity * item.product.price),
+        0
+      ); // Recalculate totalPrice
+    },
+
     // add other reducers for updating the cart
   },
 });
 
-export const { fetchCartStart, fetchCartSuccess, fetchCartFailure, removeItemSuccess } = cartSlice.actions;
+export const { fetchCartStart, fetchCartSuccess, fetchCartFailure, removeItemSuccess,setCart } = cartSlice.actions;
 export const { addCartItem } = cartSlice.actions;
 export default cartSlice.reducer;
