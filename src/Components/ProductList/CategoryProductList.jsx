@@ -4,16 +4,18 @@ import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';  
 import ProductList from './productList';
 import './productList.css'
+import { FaHeart } from 'react-icons/fa';
+
 const CategoryProductList = ({ categoryId }) => {
     const [products, setProducts] = useState([]);
-    const [categories, setCategories] = useState({}); // Store categories as an object with ID as keys and name as values
+    const [categories, setCategories] = useState({}); 
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
                 let apiUrl = 'http://127.0.0.1:8000/products/';
                 if (categoryId) {
-                    apiUrl += `category/${categoryId}/`; // Include category ID in the URL path if categoryId is provided
+                    apiUrl += `category/${categoryId}/`; 
                 }
                 const productResponse = await axios.get(apiUrl);
                 setProducts(productResponse.data);
@@ -62,7 +64,7 @@ const CategoryProductList = ({ categoryId }) => {
         return products.map((product) => {
             let quantityText = '';
             let quantityClass = '';
-
+    
             if (product.quantity > 10) {
                 quantityText = 'Available';
                 quantityClass = 'available';
@@ -73,7 +75,7 @@ const CategoryProductList = ({ categoryId }) => {
                 quantityText = 'Out of Stock';
                 quantityClass = 'out-of-stock';
             }
-
+    
             return (
                 <MDBCol key={product.id} xs={12} sm={6} md={4} lg={3}>
                     <div className="product-card">
@@ -85,9 +87,13 @@ const CategoryProductList = ({ categoryId }) => {
                             <h5 className="product-card-title">{product.name}</h5>
                             <p className="product-card-description">{product.description}</p>
                             <p className="product-card-price">Price: {product.price}$</p>
-                            <p className="product-card-category">Category: {getCategoryNameById(product.category)}</p> {/* Render category */}
+                            <p className="product-card-category">Category: {getCategoryNameById(product.category)}</p>
                             <div className="product-card-rating">
                                 Rating: {renderStarRating(product.rating)}
+                            </div>
+                            <div className="product-card-buttons">
+                                <button className="btn btn-primary">Add to Cart</button>
+                                <button className="btn btn-secondary"><FaHeart /> Wishlist</button> {/* Replace text with heart icon */}
                             </div>
                         </div>
                     </div>
@@ -95,14 +101,15 @@ const CategoryProductList = ({ categoryId }) => {
             );
         });
     };
+    
 
     return (
         <div className="product-list-container">
-            <MDBContainer fluid className="my-5 text-center">
-                <h1 className="text-center mb-4">Products</h1>
-                <MDBRow className="g-4">{renderProducts()}</MDBRow>
-            </MDBContainer>
-        </div>
+        <MDBContainer fluid className="my-5 text-center custom-scrollbar">
+          <h1 className="text-center mb-4">Welcome To FASHMART</h1>
+          <MDBRow className="g-4">{renderProducts()}</MDBRow>
+        </MDBContainer>
+      </div>
     );
 };
 
