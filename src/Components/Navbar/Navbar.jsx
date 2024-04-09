@@ -14,7 +14,7 @@ function CustomNavbar() {
     <NavbarBootstrap expand="lg" className="bg-body-tertiary fixed-top">
     <Container>
 
-      <NavbarBootstrap.Brand href="/" className="text-white">
+      <NavbarBootstrap.Brand href="/" className="text-white brand-name" >
         FASHMART
       </NavbarBootstrap.Brand>
       <NavbarBootstrap.Toggle aria-controls="basic-navbar-nav" />
