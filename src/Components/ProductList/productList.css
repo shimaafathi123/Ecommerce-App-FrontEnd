@@ -1,12 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,300,400,500,600,700,800,800i,900&display=swap');
 
+
 * {
     padding: 0;
     margin: 0;
     font-family: 'Poppins', sans-serif;
 }
-
 .product-card {
     background-color: #3d0f16;
     border-radius: 10px;

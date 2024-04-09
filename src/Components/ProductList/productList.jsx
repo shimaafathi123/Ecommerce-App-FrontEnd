@@ -56,6 +56,7 @@ const ProductList = () => {
 
     const renderProducts = () => {
         return products.map((product) => {
+            
             let quantityText = '';
             let quantityClass = '';
 

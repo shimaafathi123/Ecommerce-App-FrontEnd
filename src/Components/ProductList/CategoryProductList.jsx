@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';  
-import ProductList from '../ProductList/productList';
-
+import ProductList from './productList';
+import './productList.css'
 const CategoryProductList = ({ categoryId }) => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState({}); // Store categories as an object with ID as keys and name as values

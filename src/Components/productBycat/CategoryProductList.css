@@ -1,4 +1,85 @@
-.category-product-list-container {
+/* Product List component CSS */
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,300,400,500,600,700,800,800i,900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.product-card {
+    background-color: #3d0f16;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
+}
+
+.product-card-content {
+    padding: 20px;
+}
+
+.product-card-title {
+    font-size: 18px;
+    font-weight: 900;
+    color: #fcffce;
+    margin-bottom: 10px;
+}
+
+.product-card-description {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.product-card-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: #e60023;
+    margin-bottom: 5px;
+}
+
+.product-card-rating {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.product-card-quantity {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.product-image {
+    position: relative;
+}
+
+.product-quantity {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #28a745; 
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.product-image.out-of-stock .product-quantity {
+    background-color: rgba(75, 75, 75, 0.993); 
+}
+.low-stock {
+    background-color: #dc3545;
+}
+
+.product-list-container {
     margin-top: 60px; 
     background-color: #f9f9f9;
     padding: 20px;
@@ -6,7 +87,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.category-product-list-container h1 {
+.product-list-container h1 {
     color: #e60023;
     font-size: 28px;
     font-weight: 700;
