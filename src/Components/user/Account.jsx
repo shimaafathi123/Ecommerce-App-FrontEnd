@@ -1,5 +1,6 @@
  
 import Sidebar from './Sidebar'
+import { Link } from 'react-router-dom';
 //import * as JWT from 'jwt-decode';
 
 
@@ -28,8 +29,8 @@ function Account() {
                           From your account dashboard. you can easily check &amp; view
                           your <a href="">orders</a>, manage your{" "}
                            
-                          <a href="">change password</a> and{" "}
-                          <a href="">edit account</a> infomations.
+                          <Link to="/change-password">ChangePassword</Link>{" "}
+                          <Link to="/editAccount">EditAccountInfo</Link>
                         </div>
                       </div>
                     </section>

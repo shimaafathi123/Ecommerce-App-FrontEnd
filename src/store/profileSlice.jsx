@@ -33,7 +33,28 @@ export const updateProfile = createAsyncThunk(
   }
 );
 
+
  
+
+
+export const resetpassword = createAsyncThunk(
+  'profile/resetpassword',
+  async (formData , { rejectWithValue }) => {
+    try {
+
+      // Make API call to update the profile
+      console.log(formData)
+      const response = await axiosInstance.post('/resetpass/', formData);
+      
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
+
 
 const initialState = {
   userProfile: null,

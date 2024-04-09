@@ -4,6 +4,10 @@ import { Container, Form, Button, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProfile, updateProfile } from '../../store/profileSlice';
 
+ 
+
+ 
+
 const Profile = () => {
   const dispatch = useDispatch();
  
@@ -57,28 +61,20 @@ const Profile = () => {
    
 
   const handleChange = (e) => {
-    if (e.target.name === 'image') {
-        setFormData({ ...formData, image: e.target.files[0] });
-      } else {
+     
         setFormData({ ...formData, [e.target.name]: e.target.value });
-      }
+      
   };
 
 
   //-----------------------------------------------
-  
-  const handleImageChange = (e) => {
-     
-    const file = e.target.files[0]
-        const reader = new FileReader()
-        reader.onload = () => {
-            this.setState({file : reader.result})
-        }
-
-        if(file){
-            reader.readAsDataURL(file)
-        }
-};
+ {/**const handleImageChange = async (e) => {
+    console.log('file is uploading');
+    const selectedImage = e.target.files[0];
+    const imageUrl = URL.createObjectURL(selectedImage);
+    setFormData({ ...formData, image: selectedImage, imageUrl: imageUrl });
+  }; */} 
+   
 //------------------------------------------------------------------
 
  
@@ -207,12 +203,17 @@ const Profile = () => {
           Please fix the errors before submitting the form.
         </Alert>
       )}
-      <Form onSubmit={handleSubmit} encType="multipart/form-data">
-      {/*image*/}
-      <Form.Group className='mb-3' controlId="image">
+
+        <Form onSubmit={handleSubmit} method="post" enctype="multipart/form-data" >
+      
+      {/*image
+      <Form.Group className='mb-3' controlId="formFile">
       <Form.Label >Profile Image</Form.Label>
-      <Form.Control className='w-100' type="file" name="image"  onChange={handleImageChange} />  {/*accept = 'image/*' */}  
-    </Form.Group>
+      <Form.Control className='w-100' type="file" name="image" accept="image/*"  onChange={handleImageChange}  />
+          
+    </Form.Group> 
+    */}
+    
         {/* Full Name */}
         <Form.Group className='mb-3' controlId="full_name">
           <Form.Label>Full Name</Form.Label>
@@ -345,38 +346,10 @@ const Profile = () => {
         </Form.Group>
  
 
-        {/* New Password */}
-        <Form.Group className='mb-3' controlId="newPassword">
-          <Form.Label>New Password</Form.Label>
-          <Form.Control
-          className='w-100'
-            type="password"
-            name="newPassword"
-            value={formData.newPassword}
-            onChange={handleChange}
-            isInvalid={!!formErrors.newPassword}
-          />
-          <Form.Control.Feedback type="invalid">{formErrors.newPassword}</Form.Control.Feedback>
-        </Form.Group>
-
-        {/* Confirm Password */}
-        <Form.Group className='mb-3' controlId="confirmPassword">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-          className='w-100'
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            isInvalid={!!formErrors.confirmPassword}
-          />
-          <Form.Control.Feedback type="invalid">{formErrors.confirmPassword}</Form.Control.Feedback>
-        </Form.Group>
-
-        <Button variant="primary" type="submit" disabled={isSubmitting}>
+        <Button variant="primary" type="submit"  disabled={isSubmitting}>
           {isSubmitting ? 'Submitting...' : 'Save Changes'}
         </Button>
-      </Form>
+     </Form> 
 
 
       </div>

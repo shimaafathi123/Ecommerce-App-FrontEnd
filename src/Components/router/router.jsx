@@ -7,6 +7,8 @@ import Login from "../user/Login"
 import Profile from "../user/Profile"
 import Account from "../user/Account"
 import Logout from "../user/Logout"
+import ResetPass from "../user/ResetPass"
+
 import ProductDetail from "../productDetail/productDetail";
 import RelatedProducts from "../productDetail/relatedProduct";
 import WishList from "../WishList/WishList";
@@ -55,6 +57,10 @@ function Layout() {
         {
           path:"/editAccount",
           element: <Profile/>         
+        },
+        {
+          path:"/change-password",
+          element: <ResetPass/>         
         },
         {
           path:"/logout",

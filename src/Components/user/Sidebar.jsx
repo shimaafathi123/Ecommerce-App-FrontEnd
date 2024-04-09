@@ -27,7 +27,7 @@ function Sidebar() {
                 <>
                     <div className="d-flex justify-content-center align-items-center flex-column mb-4 shadow rounded-3">
                         <img
-                            src= "#"
+                            src= "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg"
                             style={{ width: 120, height: 120, borderRadius: "50%", objectFit: "cover" }}
                             alt=""
                         />
