@@ -9,8 +9,8 @@ import Account from "../user/Account"
 import Logout from "../user/Logout"
 import ProductDetail from "../productDetail/productDetail";
 import RelatedProducts from "../productDetail/relatedProduct";
-// import WishList from "../WishList/WishList";
-// import Order from "../Order/Order";
+import WishList from "../WishList/WishList";
+import Order from "../Order/Order";
 function Layout() {
     return (
       <>
@@ -31,14 +31,14 @@ function Layout() {
           path: "/cart",
           element: <ShoppingCart />,
         },
-        //  {
-        //   path: "/wishlist",
-        //   element: <WishList />,
-        // },
-        // {
-        //   path: "/order",
-        //   element: <Order />,
-        // },
+         {
+          path: "/wishlist",
+          element: <WishList />,
+        },
+        {
+          path: "/order",
+          element: <Order />,
+        },
         {
           path:"/register",
           element: <Register/>         
