@@ -2,7 +2,6 @@ import { Outlet, createBrowserRouter } from "react-router-dom"
 import ShoppingCart from "../cart/cart"
 import PageNotFound from "../PageNotFound/PageNotFound"
 import Home  from "../Home/Home";
-
 import Register from "../user/Register"
 import Login from "../user/Login"
 import Profile from "../user/Profile"
@@ -10,6 +9,8 @@ import Account from "../user/Account"
 import Logout from "../user/Logout"
 import ProductDetail from "../productDetail/productDetail";
 import RelatedProducts from "../productDetail/relatedProduct";
+import WishList from "../WishList/WishList";
+import Order from "../Order/Order";
 function Layout() {
     return (
       <>
@@ -29,6 +30,14 @@ function Layout() {
         {
           path: "/cart",
           element: <ShoppingCart />,
+        },
+         {
+          path: "/wishlist",
+          element: <WishList />,
+        },
+        {
+          path: "/order",
+          element: <Order />,
         },
         {
           path:"/register",
