@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Card, Button } from 'react-bootstrap';
-import RelatedProducts from './relatedProduct'; 
-import './productDetail.css'; 
+import { Button } from 'react-bootstrap';
+import { FaCartPlus, FaHeart } from 'react-icons/fa'; // Import icons
+import RelatedProducts from './relatedProduct';
+import './productDetail.css'; // Import CSS file
+import CustomNavbar from './Navbar';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -25,27 +27,37 @@ const ProductDetail = () => {
   }, [id]);
 
   return (
-    <div className="product-detail-container">
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <h2 className="product-detail-title">{product.name}</h2>
-          <Card className="product-detail-card">
-            <Card.Img variant="top" src={product.image} />
-            <Card.Body>
-              <Card.Title className="product-detail-card-title">{product.name}</Card.Title>
-              <Card.Text className="product-detail-card-description">{product.description}</Card.Text>
-              <Card.Text className="product-detail-card-price">Price: ${product.price}</Card.Text>
-              <Button variant="primary">Add to Cart</Button>
-            </Card.Body>
-          </Card>
-          <hr />
-          <div className="product-detail-related-products">
-            <RelatedProducts productId={id} />
+    <div>
+      <CustomNavbar /> 
+      <div className="product-detail-container">
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            <h2 className="product-detail-title">{product.name}</h2>
+            <div className="product-detail-content">
+              <div className="product-detail-image">
+                <img src={product.image} alt={product.name} />
+              </div>
+              <div className="product-detail-details">
+                <p className="product-detail-description">{product.description}</p>
+                <p className="product-detail-price">Price: ${product.price}</p>
+                <div className="product-detail-buttons">
+                  <Button variant="primary" className="custom-button">
+                    <FaCartPlus className="button-icon" /> Add to Cart
+                  </Button>
+                  <Button variant="secondary" className="custom-button">
+                    <FaHeart className="button-icon" /> Wishlist
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
+        )}
+        <div className="product-detail-related-products">
+          <RelatedProducts productId={id} />
         </div>
-      )}
+      </div>
     </div>
   );
 };

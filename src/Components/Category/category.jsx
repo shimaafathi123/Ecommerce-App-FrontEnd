@@ -1,15 +1,16 @@
-// Category.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavDropdown } from 'react-bootstrap';
 import ProductList from '../ProductList/productList';
 import CategoryProductList from '../ProductList/CategoryProductList';
-import './category.css'; // Import a CSS file specifically for styling the Category component
+import './category.css';
 
 const Category = () => {
     const [categories, setCategories] = useState([]);
     const [selectedCategoryId, setSelectedCategoryId] = useState(null);
     const [products, setProducts] = useState([]);
+    const [showAllProducts, setShowAllProducts] = useState(false);
+    const [loading, setLoading] = useState(false); // Added loading state
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -25,31 +26,38 @@ const Category = () => {
     }, []);
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                let apiUrl = 'http://127.0.0.1:8000/products/';
-                if (selectedCategoryId) {
-                    apiUrl += `category/${selectedCategoryId}/`;
+        if (selectedCategoryId !== null) {
+            const fetchProductsByCategory = async () => {
+                try {
+                    let apiUrl = `http://127.0.0.1:8000/products/category/${selectedCategoryId}/`;
+                    const response = await axios.get(apiUrl);
+                    setProducts(response.data);
+                    setLoading(false); // Update loading state
+                } catch (error) {
+                    console.error('Error fetching products by category:', error);
                 }
+            };
 
-                const response = await axios.get(apiUrl);
-                setProducts(response.data);
-            } catch (error) {
-                console.error('Error fetching products:', error);
-            }
-        };
-
-        fetchProducts();
+            fetchProductsByCategory();
+        }
     }, [selectedCategoryId]);
 
     const handleCategorySelect = (categoryId) => {
         setSelectedCategoryId(categoryId);
+        setShowAllProducts(false);
+        setLoading(true); // Set loading to true when a category is selected
+    };
+
+    const handleShowAllProducts = () => {
+        setSelectedCategoryId(null);
+        setShowAllProducts(true);
+        setLoading(false); // Set loading to false when all products are displayed
     };
 
     return (
         <div className="category-container">
             <NavDropdown title="Categories" id="basic-nav-dropdown" className="text-white">
-                <NavDropdown.Item key={null} onClick={() => handleCategorySelect(null)}>
+                <NavDropdown.Item key={null} onClick={handleShowAllProducts}>
                     All
                 </NavDropdown.Item>
                 {categories.map(category => (
@@ -59,10 +67,17 @@ const Category = () => {
                 ))}
             </NavDropdown>
             <div className="category-content">
-                {selectedCategoryId === null ? (
-                    <ProductList products={products} />
+                {loading ? (
+                    <p>Loading...</p>
                 ) : (
-                    <CategoryProductList categoryId={selectedCategoryId} products={products} />
+                    <>
+                        {!showAllProducts && selectedCategoryId !== null && (
+                            <CategoryProductList categoryId={selectedCategoryId} />
+                        )}
+                        {showAllProducts && (
+                            <ProductList products={products} />
+                        )}
+                    </>
                 )}
             </div>
         </div>

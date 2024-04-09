@@ -1,0 +1,22 @@
+/* relatedProduct.css */
+
+.related-products-container {
+    margin-top: 20px;
+  }
+  
+  .related-products-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+  }
+  
+  .related-product-card {
+    margin-bottom: 20px;
+    flex: 0 0 calc(25% - 20px); 
+    margin-left: 10px;
+  }
+  h3{
+    font-size: 100px;
+    text-align: center;
+    color: darkblue;
+  }
