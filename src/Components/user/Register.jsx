@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../store/registerSlice';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -69,35 +70,54 @@ const Register = () => {
 
   return (
     <Container>
-      <h3>Register Page</h3>
+
+    <main className="" style={{ marginBottom: 100, marginTop: 50 }}>
+    <div className="container">
+      <section className="">
+        <div className="row d-flex justify-content-center">
+          <div className="col-xl-5 col-md-8">
+            <div className="card rounded-5">
+              <div className="card-body p-4">
+                <h3 className="text-center">Register</h3>
+                <br />
+                <div className="tab-content">
+                  <div
+                    className="tab-pane fade show active"
+                    id="pills-login"
+                    role="tabpanel"
+                    aria-labelledby="tab-login"
+                  >
+
+
+ 
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="full_name">
+        <Form.Group className='mb-3' controlId="full_name">
           <Form.Label>Full Name</Form.Label>
-          <Form.Control type="text" name="full_name" value={formData.full_name} onChange={handleChange} />
+          <Form.Control className='w-100' type="text" name="full_name" value={formData.full_name} onChange={handleChange} />
           {formErrors.full_name && <Alert variant="danger">{formErrors.full_name}</Alert>}
         </Form.Group>
 
-        <Form.Group controlId="email">
+        <Form.Group className='mb-3' controlId="email">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} />
+          <Form.Control className='w-100' type="email" name="email" value={formData.email} onChange={handleChange} />
           {formErrors.email && <Alert variant="danger">{formErrors.email}</Alert>}
         </Form.Group>
 
-        <Form.Group controlId="phone">
+        <Form.Group className='mb-3' controlId="phone">
           <Form.Label>Phone</Form.Label>
-          <Form.Control type="text" name="phone" value={formData.phone} onChange={handleChange} />
+          <Form.Control className='w-100' type="text" name="phone" value={formData.phone} onChange={handleChange} />
           {formErrors.phone && <Alert variant="danger">{formErrors.phone}</Alert>}
         </Form.Group>
 
-        <Form.Group controlId="password">
+        <Form.Group className='mb-3' controlId="password">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" name="password" value={formData.password} onChange={handleChange} />
+          <Form.Control className='w-100' type="password" name="password" value={formData.password} onChange={handleChange} />
           {formErrors.password && <Alert variant="danger">{formErrors.password}</Alert>}
         </Form.Group>
 
-        <Form.Group controlId="confirmPassword">
+        <Form.Group className='mb-3' controlId="confirmPassword">
           <Form.Label>Confirm Password</Form.Label>
-          <Form.Control type="password" name="password2" value={formData.password2} onChange={handleChange} />
+          <Form.Control className='w-100' type="password" name="password2" value={formData.password2} onChange={handleChange} />
           {formErrors.password2 && <Alert variant="danger">{formErrors.password2}</Alert>}
         </Form.Group>
 
@@ -105,6 +125,24 @@ const Register = () => {
           Register
         </Button>
       </Form>
+
+
+      
+      </div>
+      </div>
+      <div className="text-center">
+        <p className='mt-4'>
+          do you have an account? <Link to="/login">Login</Link>
+        </p>
+       
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+</div>
+</main>
     </Container>
   );
 };

@@ -2,20 +2,26 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';  
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import './productList.css';
+import ProductList from './productList';
+import './productList.css'
 import { FaHeart } from 'react-icons/fa';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
-const ProductList = () => {
+const CategoryProductList = ({ categoryId }) => {
     const [products, setProducts] = useState([]);
-    const [categories, setCategories] = useState({});
+    const [categories, setCategories] = useState({}); 
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const productResponse = await axios.get('http://127.0.0.1:8000/products/');
+                let apiUrl = 'http://127.0.0.1:8000/products/';
+                if (categoryId) {
+                    apiUrl += `category/${categoryId}/`; 
+                }
+                const productResponse = await axios.get(apiUrl);
                 setProducts(productResponse.data);
 
+                // Fetch categories separately
                 const categoryResponse = await axios.get('http://127.0.0.1:8000/categories/');
                 const categoriesData = categoryResponse.data.reduce((acc, category) => {
                     acc[category.id] = category.name;
@@ -28,7 +34,7 @@ const ProductList = () => {
         };
 
         fetchProducts();
-    }, []);
+    }, [categoryId]);
 
     const renderStarRating = (rating) => {
         const stars = [];
@@ -110,4 +116,4 @@ const ProductList = () => {
     );
 };
 
-export default ProductList;
+export default CategoryProductList;

@@ -6,6 +6,10 @@ import Home  from "../Home/Home";
 import Register from "../user/Register"
 import Login from "../user/Login"
 import Profile from "../user/Profile"
+import Account from "../user/Account"
+import Logout from "../user/Logout"
+import ProductDetail from "../productDetail/productDetail";
+import RelatedProducts from "../productDetail/relatedProduct";
 function Layout() {
     return (
       <>
@@ -37,12 +41,25 @@ function Layout() {
         },
         {
           path:"/profile",
+          element: <Account/>         
+        },
+        {
+          path:"/editAccount",
           element: <Profile/>         
+        },
+        {
+          path:"/logout",
+          element: <Logout/>         
         },
         {
           path: "*",
           element: <PageNotFound />,
         },
+        {
+          path:"/products/:id",
+          element:<ProductDetail/>
+        },
+        
       ],
     },
   ]);

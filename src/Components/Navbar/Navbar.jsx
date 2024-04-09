@@ -5,16 +5,18 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
-import'./Navbar.css'
+import './Navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faHeart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; // Import the logout icon
+
+import Category from '../Category/category';
 
 function CustomNavbar() {
   return (
     <NavbarBootstrap expand="lg" className="bg-body-tertiary fixed-top">
     <Container>
 
-      <NavbarBootstrap.Brand href="/" className="text-white brand-name" >
+      <NavbarBootstrap.Brand href="/" className="text-white">
         FASHMART
       </NavbarBootstrap.Brand>
       <NavbarBootstrap.Toggle aria-controls="basic-navbar-nav" />
@@ -58,6 +60,5 @@ function CustomNavbar() {
   </NavbarBootstrap>
 );
 }
-
 
 export default CustomNavbar;

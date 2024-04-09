@@ -1,12 +1,12 @@
-
+/* Product List component CSS */
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,300,400,500,600,700,800,800i,900&display=swap');
-
 
 * {
     padding: 0;
     margin: 0;
     font-family: 'Poppins', sans-serif;
 }
+
 .product-card {
     background-color: #3d0f16;
     border-radius: 10px;
@@ -77,79 +77,19 @@
 }
 .low-stock {
     background-color: #dc3545;
-  }
+}
+
 .product-list-container {
-    margin-top: 35px; 
+    margin-top: 60px; 
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    justify-content: center; 
-    transform: translateX(-50%);
-    left: 50%;
-    position: fixed;
-    height: auto;  
 }
-  
-  .product-list-container h1 {
+
+.product-list-container h1 {
     color: #e60023;
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 20px;
-  }
-
-
-.custom-scrollbar {
-    max-height: 500px; 
-    overflow-y: auto;
-  }
-  
-  /* Style for the scrollbar */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 10px; 
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #3d0f16; 
-    border-radius: 5px; 
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #3d0f16; 
-  }
-  /* productList.css */
-
-.product-card-buttons {
-    margin-top: 10px;
 }
-
-.product-card-buttons button {
-    margin-right: 10px; /* Add spacing between buttons */
-}
-
-.product-card-buttons button.btn-primary {
-    background-color: #e60023; /* Change background color for "Add to Cart" button */
-    border-color: #e60023;
-}
-
-.product-card-buttons button.btn-primary:hover {
-    background-color: #e60023; 
-    transform: scale(1.1); /* Increase size by 10% on hover */
-}
-
-
-.product-card-buttons button.btn-secondary {
-    background-color: #6c757d; 
-    border-color: #6c757d;
-}
-
-.product-card-buttons button.btn-secondary:hover {
-    background-color: #ffffff; 
-    color:#5a6268;
-}
-
