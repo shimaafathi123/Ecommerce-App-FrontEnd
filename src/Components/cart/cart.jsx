@@ -1,48 +1,85 @@
-import  { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCartStart, removeItemSuccess } from '../../store/cartSlice';
-import CartItem from './CartItem';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import CartItem from '../cart/CartItem';
+import { Link } from 'react-router-dom';
+import PaginationComponent from '../pagination/pagination';
+import CustomNavbar from "../Navbar/Navbar"
 
-function Cart() {
-  const dispatch = useDispatch();
-  const cart = useSelector(state => state.cart.cart);
-  const loading = useSelector(state => state.cart.loading);
-  const error = useSelector(state => state.cart.error);
+export default function UserCart() {
+    const { cart } = useSelector((state) => state.cart);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
 
-  useEffect(() => {
-    dispatch(fetchCartStart());
-  }, [dispatch]);
+    useEffect(() => {
+        if (cart) {
+            let total = 0;
+            cart.forEach((item) => {
+                total += item.itemData.price * item.quantity;
+            });
+            setTotalPrice(total);
+        }
+    }, [cart]);
 
-  const handleRemoveItem = productId => {
-    // Dispatch action to remove item from cart
-    dispatch(removeItemSuccess(/* pass the updated cart after removing item */));
-  };
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
 
-  // add other handler functions
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentCart = cart.slice(indexOfFirstItem, indexOfLastItem);
 
-  return (
-    <div>
-      <h2>Shopping Cart</h2>
-      {loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>Error: {error.message}</p>
-      ) : cart ? (
-        <div>
-          {cart.cart_items.map(item => (
-            <CartItem
-              key={item.id}
-              item={item}
-              onRemove={() => handleRemoveItem(item.product.id)}
-              // Pass other props and handlers to CartItem
-            />
-          ))}
+    const totalPages = Math.ceil(cart.length / itemsPerPage);
+    const isLastPage = currentPage === totalPages;
+
+    return (
+      <>
+      <CustomNavbar/>
+      <br></br>
+      <br></br>
+      <br></br>
+        <div className="container">
+
+            <h1 className="mt-5 text-dark text-center">Shopping Cart</h1>
+            <table className="table mt-4">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {currentCart.length > 0 ? (
+                        currentCart.map((item, index) => (
+                            <CartItem key={index} item={item.itemData} quantity={item.quantity} />
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="5" className="fs-2 text-danger text-center">
+                                Cart is Empty
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+            <div className="d-flex justify-content-center">
+                <PaginationComponent currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+            </div>
+            {isLastPage && cart.length !== 0 && (
+                <div className="container total m-4">
+                    <div className="row">
+                        <div className="col fs-2 text-success">Total</div>
+                        <div className="col fs-2 text-success">${totalPrice}</div>
+                        <Link to="/checkout">
+                            <button className="border-2 w-25 btn btn-success">Payment</button>
+                        </Link>
+                    </div>
+                </div>
+            )}
         </div>
-      ) : (
-        <p>Cart is empty</p>
-      )}
-    </div>
-  );
+        </>
+    );
 }
-
-export default Cart;

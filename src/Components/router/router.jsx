@@ -1,5 +1,5 @@
 import { Outlet, createBrowserRouter } from "react-router-dom"
-import ShoppingCart from "../cart/cart"
+import UserCart from "../cart/cart"
 import PageNotFound from "../PageNotFound/PageNotFound"
 import Home  from "../Home/Home";
 import Register from "../user/Register"
@@ -10,7 +10,6 @@ import Logout from "../user/Logout"
 import ResetPass from "../user/ResetPass"
 
 import ProductDetail from "../productDetail/productDetail";
-import RelatedProducts from "../productDetail/relatedProduct";
 import WishList from "../WishList/WishList";
 import Order from "../Order/Order";
 function Layout() {
@@ -31,7 +30,7 @@ function Layout() {
         },
         {
           path: "/cart",
-          element: <ShoppingCart />,
+          element: <UserCart />,
         },
          {
           path: "/wishlist",
