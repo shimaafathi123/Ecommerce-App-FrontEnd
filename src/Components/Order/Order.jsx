@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 
 function Order() {
     const [orders, setOrders] = useState([]);
@@ -82,10 +82,12 @@ function Order() {
                             </td>
 
                             <td className="align-middle">
-                                {order.status !== 'cancelled' && ( {/* Display Cancel button only if order is not already cancelled */}
-                                    <button className="btn btn-danger" onClick={() => cancelOrder(order.id)}>Cancel</button>
-                                )}
+                             {/* Display Cancel button only if order is not already cancelled */}
+                             {order.status !== 'cancelled' && (
+                            <button className="btn btn-danger" onClick={() => cancelOrder(order.id)}>Cancel</button>
+                                   )}
                             </td>
+
                         </tr>
                     ))}
                 </tbody>
