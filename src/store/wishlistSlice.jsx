@@ -24,12 +24,14 @@ export const addToWishlist = createAsyncThunk(
 
 export const removeFromWishlist = createAsyncThunk(
   "wishlist/removeFromWishlist",
-  async (productid) => {
-    const product_id = Number(productid);
-    console.log(typeof product_id);
-    await axios.delete(`http://localhost:8000/users/wishlist`, {
-      data: { product_id },
-    });
+  async (productId) => {
+    try {
+      await axios.delete(`http://localhost:8000/users/wishlist/${productId}`);
+      return productId; // Return the productId to identify which item was removed
+    } catch (error) {
+      console.error("Error occurred while removing item from wishlist:", error);
+      throw error; 
+    }
   }
 );
 
