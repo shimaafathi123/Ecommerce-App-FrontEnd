@@ -9,6 +9,7 @@ import Profile from "../user/Profile"
 import Account from "../user/Account"
 import Logout from "../user/Logout"
 import ProductDetail from "../productDetail/productDetail";
+import RelatedProducts from "../productDetail/relatedProduct";
 function Layout() {
     return (
       <>
@@ -57,7 +58,8 @@ function Layout() {
         {
           path:"/products/:id",
           element:<ProductDetail/>
-        }
+        },
+        
       ],
     },
   ]);

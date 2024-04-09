@@ -1,0 +1,37 @@
+/* ProductDetail.css */
+
+.product-detail-container {
+    margin: 20px;
+  }
+  
+  .product-detail-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .product-detail-card {
+    width: 300px;
+    margin: 20px auto;
+  }
+  
+  .product-detail-card img {
+    width: 100%;
+  }
+  
+  .product-detail-card-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .product-detail-card-description {
+    margin-bottom: 10px;
+  }
+  
+  .product-detail-card-price {
+    font-weight: bold;
+  }
+  
+  .product-detail-related-products {
+    margin-top: 20px;
+  }
+  
