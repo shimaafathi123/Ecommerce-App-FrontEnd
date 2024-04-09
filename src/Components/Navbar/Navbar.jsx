@@ -50,7 +50,7 @@ function CustomNavbar() {
           <Nav.Link href="/cart" className="text-white">
             <FontAwesomeIcon icon={faShoppingCart} />
           </Nav.Link>
-          <Nav.Link href="#wishlist" className="text-white">
+          <Nav.Link href="/wishlist" className="text-white">
             <FontAwesomeIcon icon={faHeart} />
           </Nav.Link>
         </Nav>
