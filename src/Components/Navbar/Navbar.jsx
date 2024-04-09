@@ -9,7 +9,6 @@ import './Navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faHeart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; // Import the logout icon
 
-import Category from '../Category/category';
 
 function CustomNavbar() {
   return (
