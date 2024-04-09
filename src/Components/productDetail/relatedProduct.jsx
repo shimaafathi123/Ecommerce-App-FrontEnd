@@ -25,7 +25,7 @@ const RelatedProducts = ({ productId }) => {
 
   return (
     <div className="related-products-container">
-      <h3>Related Products</h3>
+      <h3 className='product'>Related Products</h3>
       <div className="related-products-list">
         {relatedProducts.map(product => (
           <Link key={product.id} to={`/products/${product.id}`} className="related-product-link">

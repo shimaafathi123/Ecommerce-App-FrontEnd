@@ -15,7 +15,7 @@
     flex: 0 0 calc(25% - 20px); 
     margin-left: 10px;
   }
-  h3{
+  .product h3{
     font-size: 100px;
     text-align: center;
     color: darkblue;
