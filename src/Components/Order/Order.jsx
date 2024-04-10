@@ -83,7 +83,7 @@ function Order() {
 
                             <td className="align-middle">
                              {/* Display Cancel button only if order is not already cancelled */}
-                             {order.status !== 'cancelled' && (
+                             {order.status !== 'canceled' && (
                             <button className="btn btn-danger" onClick={() => cancelOrder(order.id)}>Cancel</button>
                                    )}
                             </td>
