@@ -42,13 +42,14 @@ const CheckoutForm = () => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className='w-75 m-5 border p-5 rounded-2 shadow mx-auto'>
-      <h2>Checkout</h2>
+    <div className="d-flex justify-content-center align-items-center vh-100">
+    <form onSubmit={formik.handleSubmit} className='w-75 m-5 border p-5 rounded-2 shadow mx-auto text-center'>
+      <h2 className='mb-3 text-danger fw-bold fs-2'>Checkout</h2>
       <div className="mb-3">
         <input
           type="text"
           placeholder='Checkout Details'
-          className="form-control"
+          className="form-control w-75 mx-auto"
           name="checkoutDetails"
           value={formik.values.checkoutDetails}
           onChange={formik.handleChange}
@@ -59,7 +60,7 @@ const CheckoutForm = () => {
         <input
           type="text"
           placeholder='Phone'
-          className="form-control"
+          className="form-control w-75 mx-auto"
           name="phone"
           value={formik.values.phone}
           onChange={formik.handleChange}
@@ -70,7 +71,7 @@ const CheckoutForm = () => {
         <input
           type="text"
           placeholder='City'
-          className="form-control"
+          className="form-control w-75 mx-auto"
           name="city"
           value={formik.values.city}
           onChange={formik.handleChange}
@@ -79,14 +80,16 @@ const CheckoutForm = () => {
       </div>
       <button
         type="button"
-        className="btn btn-success font-semibold hover:bg-green-700 text-sm text-white uppercase w-full"
+        className="btn btn-danger font-semibold hover:bg-green-700 text-sm text-white uppercase w-full"
         onClick={() => payWithStripe()}
         disabled={formik.isSubmitting} // Disable button during form submission
       >
         {formik.isSubmitting ? "Processing..." : "Checkout"}
       </button>
     </form>
+    </div>
   );
 };
 
 export default CheckoutForm;
+
