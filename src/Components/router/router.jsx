@@ -12,6 +12,7 @@ import ResetPass from "../user/ResetPass"
 import ProductDetail from "../productDetail/productDetail";
 import WishList from "../WishList/WishList";
 import Order from "../Order/Order";
+import CheckoutForm from "../payment/checkout"
 function Layout() {
     return (
       <>
@@ -73,7 +74,10 @@ function Layout() {
           path:"/products/:id",
           element:<ProductDetail/>
         },
-        
+        {
+          path:"/checkout",
+          element:<CheckoutForm/>
+        },
       ],
     },
   ]);

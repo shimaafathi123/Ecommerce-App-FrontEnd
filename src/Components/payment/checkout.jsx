@@ -1,11 +1,22 @@
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { addUserInfo } from '../../store/slices/profileSlice';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
+import interceptorInstance from "../../axios/cartApi";
 import * as Yup from 'yup';
 
+const payWithStripe = () => {
+  interceptorInstance
+    .post(`orders/checkout/`)
+    .then((response) => {
+      // Redirect to stripe payment page
+      window.location.href = response.data.url;
+    })
+    .catch((error) => {
+      // Handle errors gracefully
+      console.error("Error during checkout:", error);
+    });
+};
+
 const CheckoutForm = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const validationSchema = Yup.object({
@@ -23,9 +34,10 @@ const CheckoutForm = () => {
       city: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      dispatch(addUserInfo(values));
-      navigate('/checkout'); 
+    onSubmit: (values, { setSubmitting }) => {
+      setSubmitting(true); // Prevent multiple form submissions
+      // dispatch(addUserInfo(values)); // If you need to dispatch any action before redirection
+      payWithStripe(); // Redirect to Stripe payment page
     },
   });
 
@@ -65,9 +77,14 @@ const CheckoutForm = () => {
         />
         {formik.errors.city && <div className="text-danger">{formik.errors.city}</div>}
       </div>
-      <Link to="/payment">
-      <button type="submit" className="btn btn-success">Checkout</button>
-      </Link>
+      <button
+        type="button"
+        className="btn btn-success font-semibold hover:bg-green-700 text-sm text-white uppercase w-full"
+        onClick={() => payWithStripe()}
+        disabled={formik.isSubmitting} // Disable button during form submission
+      >
+        {formik.isSubmitting ? "Processing..." : "Checkout"}
+      </button>
     </form>
   );
 };

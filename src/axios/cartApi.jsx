@@ -18,3 +18,10 @@ export async function increaseItemQuantity(productId) {
 export async function decreaseItemQuantity(productId) {
   await axios.patch(`${BASE_URL}/cart/item/${productId}/decrease/`);
 }
+
+const interceptorInstance = axios.create({
+  baseURL: BASE_URL,
+  // You can add other configurations here
+});
+
+export default interceptorInstance;
