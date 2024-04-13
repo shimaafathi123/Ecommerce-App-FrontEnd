@@ -23,6 +23,7 @@ function CustomNavbar() {
             <Nav.Link href="/" className="text-white">Home</Nav.Link>
             <Nav.Link href="/login" className="text-white">Sign in</Nav.Link>
 
+            {/* Replace NavDropdown with Category component */}
             <Category />
           </Nav>
           <Form className="d-flex">

@@ -90,6 +90,7 @@
     left: 50%;
     position: fixed;
     height: auto;  
+    z-index: 1; 
 }
   
   .product-list-container h1 {

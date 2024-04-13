@@ -13,6 +13,8 @@ import ProductDetail from "../productDetail/productDetail";
 import WishList from "../WishList/WishList";
 import Order from "../Order/Order";
 import CheckoutForm from "../payment/checkout"
+import ProductList from "../ProductList/productList";
+import CategoryProductList from "../ProductList/CategoryProductList";
 function Layout() {
     return (
       <>
@@ -78,6 +80,14 @@ function Layout() {
           path:"/checkout",
           element:<CheckoutForm/>
         },
+        {
+          path:"/all",
+          element:<ProductList/>
+        },
+        {
+          path:"/category/:categoryId",
+          element:<CategoryProductList/>
+        }
       ],
     },
   ]);

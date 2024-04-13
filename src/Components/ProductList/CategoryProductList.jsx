@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';  
-import ProductList from './productList';
-import './productList.css'
+import { Link, useParams } from 'react-router-dom'; // Import Link and useParams from react-router-dom
+import './productList.css';
 import { FaHeart } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
-const CategoryProductList = ({ categoryId }) => {
+const CategoryProductList = () => {
+    const { categoryId } = useParams(); // Get categoryId from URL params
     const [products, setProducts] = useState([]);
-    const [categories, setCategories] = useState({}); 
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -23,11 +23,7 @@ const CategoryProductList = ({ categoryId }) => {
 
                 // Fetch categories separately
                 const categoryResponse = await axios.get('http://127.0.0.1:8000/categories/');
-                const categoriesData = categoryResponse.data.reduce((acc, category) => {
-                    acc[category.id] = category.name;
-                    return acc;
-                }, {});
-                setCategories(categoriesData);
+                setCategories(categoryResponse.data);
             } catch (error) {
                 console.error('Error fetching products:', error);
             }
@@ -58,7 +54,8 @@ const CategoryProductList = ({ categoryId }) => {
     };
 
     const getCategoryNameById = (categoryId) => {
-        return categories[categoryId] || 'Unknown Category';
+        const category = categories.find(cat => cat.id === categoryId);
+        return category ? category.name : 'Unknown Category';
     };
 
     const renderProducts = () => {
@@ -79,7 +76,7 @@ const CategoryProductList = ({ categoryId }) => {
     
             return (
                 <MDBCol key={product.id} xs={12} sm={6} md={4} lg={3}>
-                    <Link to={`/products/${product.id}`} className="product-link"> {/* Link to product detail page */}
+                    <Link to={`/products/${product.id}`} className="product-link">
                         <div className="product-card">
                             <div className={`product-image ${quantityClass}`}>
                                 <img src={product.image} alt={product.name} />
@@ -95,7 +92,7 @@ const CategoryProductList = ({ categoryId }) => {
                                 </div>
                                 <div className="product-card-buttons">
                                     <button className="btn btn-primary">Add to Cart</button>
-                                    <button className="btn btn-secondary"><FaHeart /> Wishlist</button> {/* Replace text with heart icon */}
+                                    <button className="btn btn-secondary"><FaHeart /> Wishlist</button>
                                 </div>
                             </div>
                         </div>
@@ -104,15 +101,14 @@ const CategoryProductList = ({ categoryId }) => {
             );
         });
     };
-    
 
     return (
         <div className="product-list-container">
-        <MDBContainer fluid className="my-5 text-center custom-scrollbar">
-          <h1 className="text-center mb-4">Welcome To FASHMART</h1>
-          <MDBRow className="g-4">{renderProducts()}</MDBRow>
-        </MDBContainer>
-      </div>
+            <MDBContainer fluid className="my-5 text-center custom-scrollbar">
+                <h1 className="text-center mb-4">Welcome To FASHMART</h1>
+                <MDBRow className="g-4">{renderProducts()}</MDBRow>
+            </MDBContainer>
+        </div>
     );
 };
 
