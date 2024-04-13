@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { setWishlist } from "../../store/wishlistSlice";
-import Navbar from "../Navbar/Navbar";
 import { ToastContainer } from "react-toastify";
 
 function WishList() {
@@ -38,7 +37,6 @@ function WishList() {
 
   return (
     <>
-      <Navbar />
       <ToastContainer />
       <div className="container mx-auto mt-5">
         <div className="shadow p-4">
