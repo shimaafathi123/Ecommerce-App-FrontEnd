@@ -22,9 +22,9 @@ const Profile = () => {
 
   const [formData, setFormData] = useState({
     image: null,
-    full_name: '',
-    email: '',
-    phone: '',
+    full_name_profile: '',
+    emailprofile: '',
+    phoneprofile: '',
     about: '',
     gender: '',
     country: '',
@@ -40,9 +40,9 @@ const Profile = () => {
   useEffect(() => {
     if (userProfile) {
       setFormData({
-        full_name: userProfile.full_name || '',
-        email: userProfile.email || '',
-        phone: userProfile.phone || '',
+        full_name_profile: userProfile.full_name_profile || '',
+        emailprofile: userProfile.emailprofile || '',
+        phoneprofile: userProfile.phoneprofile || '',
         about: userProfile.about || '',
         gender: userProfile.gender || '',
         country: userProfile.country || '',
@@ -84,20 +84,20 @@ const Profile = () => {
     const errors = {};
 
     // Validate full name
-    if (!formData.full_name.trim()) {
-      errors.full_name = 'Full Name is required';
+    if (!formData.full_name_profile.trim()) {
+      errors.full_name_profile = 'Full Name is required';
       isValid = false;
     }
 
     // Validate email
-    if (!formData.email.trim() || !/^\S+@\S+\.\S+$/.test(formData.email)) {
-      errors.email = 'Email should be in email format';
+    if (!formData.emailprofile.trim() || !/^\S+@\S+\.\S+$/.test(formData.emailprofile)) {
+      errors.emailprofile = 'Email should be in email format';
       isValid = false;
     }
 
     // Validate phone
-    if (!formData.phone.trim()) {
-      errors.phone = 'Phone is required';
+    if (!formData.phoneprofile.trim()) {
+      errors.phoneprofile = 'Phone is required';
       isValid = false;
     }
 
@@ -204,7 +204,7 @@ const Profile = () => {
         </Alert>
       )}
 
-        <Form onSubmit={handleSubmit} method="post" enctype="multipart/form-data" >
+        <Form onSubmit={handleSubmit} method="post"  >{/*encType="multipart/form-data" */}
       
       {/*image
       <Form.Group className='mb-3' controlId="formFile">
@@ -215,46 +215,46 @@ const Profile = () => {
     */}
     
         {/* Full Name */}
-        <Form.Group className='mb-3' controlId="full_name">
+        <Form.Group className='mb-3' controlId="full_name_profile">
           <Form.Label>Full Name</Form.Label>
           <Form.Control
           className='w-100'
             type="text"
-            name="full_name"
-            value={formData.full_name}
+            name="full_name_profile"
+            value={formData.full_name_profile}
             onChange={handleChange}
-            isInvalid={!!formErrors.full_name}
+            isInvalid={!!formErrors.full_name_profile}
           />
-          <Form.Control.Feedback type="invalid">{formErrors.full_name}</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">{formErrors.full_name_profile}</Form.Control.Feedback>
 
         </Form.Group>
 
         {/* Email */}
-        <Form.Group className='mb-3' controlId="email">
+        <Form.Group className='mb-3' controlId="emailprofile">
           <Form.Label>Email</Form.Label>
           <Form.Control
           className='w-100'
             type="email"
-            name="email"
-            value={formData.email}
+            name="emailprofile"
+            value={formData.emailprofile}
             onChange={handleChange}
-            isInvalid={!!formErrors.email}
+            isInvalid={!!formErrors.emailprofile}
           />
-          <Form.Control.Feedback type="invalid">{formErrors.email}</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">{formErrors.emailprofile}</Form.Control.Feedback>
         </Form.Group>
 
         {/* Phone */}
-        <Form.Group className='mb-3' controlId="phone">
+        <Form.Group className='mb-3' controlId="phoneprofile">
           <Form.Label>Phone</Form.Label>
           <Form.Control
           className='w-100'
             type="text"
-            name="phone"
-            value={formData.phone}
+            name="phoneprofile"
+            value={formData.phoneprofile}
             onChange={handleChange}
-            isInvalid={!!formErrors.phone}
+            isInvalid={!!formErrors.phoneprofile}
           />
-          <Form.Control.Feedback type="invalid">{formErrors.phone}</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">{formErrors.phoneprofile}</Form.Control.Feedback>
         </Form.Group>
 
         {/* About */}

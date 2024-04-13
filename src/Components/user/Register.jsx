@@ -5,9 +5,11 @@ import { Container, Form, Button, Alert } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../store/registerSlice';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 
 const Register = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     full_name: '',
@@ -34,12 +36,14 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
+      console.log(formData)
       dispatch(registerUser(formData))
       .then((response) => {
         console.log(response)
-        if(response.payload.access!=undefined){
-          localStorage.setItem('token', response.payload.access);
-        }
+       // if(response.payload.access_token!=undefined){
+        //  localStorage.setItem('token', response.payload.access_token);
+          navigate('/login');
+       // }
          
       })
     }

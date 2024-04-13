@@ -8,6 +8,7 @@ import Profile from "../user/Profile"
 import Account from "../user/Account"
 import Logout from "../user/Logout"
 import ResetPass from "../user/ResetPass"
+import UserAdminPanel from "../admin/UserAdminPanel"
 
 import ProductDetail from "../productDetail/productDetail";
 import WishList from "../WishList/WishList";
@@ -68,6 +69,7 @@ function Layout() {
           path:"/logout",
           element: <Logout/>         
         },
+        
         {
           path: "*",
           element: <PageNotFound />,
@@ -87,6 +89,10 @@ function Layout() {
         {
           path:"/category/:categoryId",
           element:<CategoryProductList/>
+        },
+        {
+          path:"/admin/user",
+          element:<UserAdminPanel/>
         }
       ],
     },
