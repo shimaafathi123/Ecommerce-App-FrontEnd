@@ -3,10 +3,12 @@ import { Container, Form, Button, Alert } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../store/loginSlice';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -30,7 +32,9 @@ const Login = () => {
       dispatch(loginUser(formData))
       .then((response) => {
         if(response.payload.access!=undefined){
+          console.log(response.payload.access)
           localStorage.setItem('token', response.payload.access);
+          navigate('/home');
         }
       })
     }
