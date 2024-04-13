@@ -4,6 +4,7 @@ import CartItem from './CartItem';
 import { clearCart } from '../../store/cartSlice';
 import { Link } from 'react-router-dom';
 import PaginationComponent from '../pagination/pagination';
+import CustomNavbar from '../Navbar/Navbar';
 
 export default function UserCart() {
     // Retrieve cart state from Redux store
@@ -41,10 +42,13 @@ export default function UserCart() {
     const isLastPage = currentPage === totalPages;
 
     return (
-        <div className="container">
-            <div className="d-flex justify-content-between align-items-center mb-3">
-                <h1 className="mt-4 text-dark">Shopping Cart</h1>
-                <button onClick={handleClearCart} className="btn btn-danger">Clear Cart</button> {/* Clear Cart button */}
+        <>
+        <CustomNavbar/>
+        <div className="container m-5">
+            
+            <div className="d-flex justify-content-between align-items-center mt-5">
+                <h1 className="mt-5 text-dark">Shopping Cart</h1>
+                <button onClick={handleClearCart} className="btn btn-danger mt-5">Clear Cart</button> {/* Clear Cart button */}
             </div>
             <table className="table mt-4">
                 <thead>
@@ -86,6 +90,7 @@ export default function UserCart() {
                 <PaginationComponent currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
             </div>
         </div>
+        </>
     );
 }
 
