@@ -31,13 +31,13 @@
   
   /* Home.css */
 /* Home.css */
-.home-background {
+body{
     background-image: url('bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 100vh; /* Ensure the container covers the entire viewport height */
+    height: 300vh;
 }
 
   

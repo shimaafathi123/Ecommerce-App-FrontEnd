@@ -1,7 +1,6 @@
 /* productDetail.css */
 
 .product-detail-container {
-    background-color: rgb(235, 231, 231);
     width: 100%;
     display: flex;
     flex-direction: column;
