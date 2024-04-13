@@ -63,7 +63,7 @@ export default function UserCart() {
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="5" className="fs-2 text-danger">
+                            <td colSpan="5" className="fs-2 text-danger text-center">
                                 Cart is Empty
                             </td>
                         </tr>
