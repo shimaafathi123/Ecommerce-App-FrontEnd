@@ -27,9 +27,9 @@ const RelatedProducts = ({ productId }) => {
     fetchRelatedProducts();
   }, [productId]);
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product)); 
-  };
+  // const handleAddToCart = (product) => {
+  //   dispatch(addToCart(product)); 
+  // };
 
   return (
     <div className="related-products-container">

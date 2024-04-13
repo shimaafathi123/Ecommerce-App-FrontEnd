@@ -5,10 +5,16 @@ import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './productList.css';
 import { FaHeart } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+//import { addCartItem } from '../../store/cartSlice';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState({});
+    const dispatch = useDispatch();
+    // const addItemToCart = (item) => {
+    //     dispatch(addCartItem(item))
+    // }
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -88,7 +94,7 @@ const ProductList = () => {
                                     Rating: {renderStarRating(product.rating)}
                                 </div>
                                 <div className="product-card-buttons">
-                                    <button className="btn btn-primary">Add to Cart</button>
+                                    <button className="btn btn-primary" onClick={() => addItemToCart(product)}>Add to Cart</button>
                                     <button className="btn btn-secondary"><FaHeart /> Wishlist</button> {/* Replace text with heart icon */}
                                 </div>
                             </div>

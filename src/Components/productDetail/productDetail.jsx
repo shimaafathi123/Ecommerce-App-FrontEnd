@@ -6,11 +6,18 @@ import { FaCartPlus, FaHeart } from 'react-icons/fa'; // Import icons
 import RelatedProducts from './relatedProduct';
 import './productDetail.css'; // Import CSS file
 import CustomNavbar from './Navbar';
+import { useDispatch } from 'react-redux';
+//import { addCartItem } from '../../store/cartSlice';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // const dispatch = useDispatch();
+  // const addItemToCart = (item) => {
+  //     dispatch(addCartItem(item))
+  // }
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -44,7 +51,7 @@ const ProductDetail = () => {
                 <p className="product-detail-price">Price: ${product.price}</p>
                 <div className="product-detail-buttons">
                   <Button variant="primary" className="custom-button">
-                    <FaCartPlus className="button-icon" /> Add to Cart
+                    <FaCartPlus className="button-icon" onClick={() => addItemToCart(product)}/> Add to Cart
                   </Button>
                   <Button variant="secondary" className="custom-button">
                     <FaHeart className="button-icon" /> Wishlist
