@@ -16,6 +16,8 @@ import Order from "../Order/Order";
 import CheckoutForm from "../payment/checkout"
 import ProductList from "../ProductList/productList";
 import CategoryProductList from "../ProductList/CategoryProductList";
+import UserHome from "../user/userHome";
+
 function Layout() {
     return (
       <>
@@ -93,6 +95,10 @@ function Layout() {
         {
           path:"/admin/user",
           element:<UserAdminPanel/>
+        },
+        {
+          path:"/home",
+          element:<UserHome/>
         }
       ],
     },
