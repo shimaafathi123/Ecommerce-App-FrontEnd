@@ -1,15 +1,20 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import CartItem from '../cart/CartItem';
+import { useSelector, useDispatch } from 'react-redux';
+import CartItem from './CartItem';
+import { clearCart } from '../../store/cartSlice';
 import { Link } from 'react-router-dom';
 import PaginationComponent from '../pagination/pagination';
-import CustomNavbar from "../Navbar/Navbar"
 
 export default function UserCart() {
+    // Retrieve cart state from Redux store
     const { cart } = useSelector((state) => state.cart);
+
+    // Initialize state variables
     const [totalPrice, setTotalPrice] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (cart) {
@@ -24,6 +29,9 @@ export default function UserCart() {
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
+    const handleClearCart = () => {
+        dispatch(clearCart()); 
+    };
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -33,14 +41,11 @@ export default function UserCart() {
     const isLastPage = currentPage === totalPages;
 
     return (
-      <>
-      <CustomNavbar/>
-      <br></br>
-      <br></br>
-      <br></br>
         <div className="container">
-
-            <h1 className="mt-5 text-dark text-center">Shopping Cart</h1>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+                <h1 className="mt-4 text-dark">Shopping Cart</h1>
+                <button onClick={handleClearCart} className="btn btn-danger">Clear Cart</button> {/* Clear Cart button */}
+            </div>
             <table className="table mt-4">
                 <thead>
                     <tr>
@@ -58,18 +63,16 @@ export default function UserCart() {
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="5" className="fs-2 text-danger text-center">
+                            <td colSpan="5" className="fs-2 text-danger">
                                 Cart is Empty
                             </td>
                         </tr>
                     )}
                 </tbody>
             </table>
-            <div className="d-flex justify-content-center">
-                <PaginationComponent currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-            </div>
+            
             {isLastPage && cart.length !== 0 && (
-                <div className="container total m-4">
+                <div className="container total m-4 ">
                     <div className="row">
                         <div className="col fs-2 text-success">Total</div>
                         <div className="col fs-2 text-success">${totalPrice}</div>
@@ -79,7 +82,10 @@ export default function UserCart() {
                     </div>
                 </div>
             )}
+            <div className="d-flex justify-content-center ms-5">
+                <PaginationComponent currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+            </div>
         </div>
-        </>
     );
 }
+
