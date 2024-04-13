@@ -79,8 +79,7 @@
     background-color: #dc3545;
   }
 .product-list-container {
-    margin-top: 35px; 
-    background-color: #f9f9f9;
+    margin-top: 50px; 
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -88,23 +87,13 @@
     justify-content: center; 
     transform: translateX(-50%);
     left: 50%;
-    position: fixed;
-    height: auto;  
-    z-index: 1; 
+    position: relative;
 }
   
-  .product-list-container h1 {
-    color: #e60023;
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 20px;
-  }
+ 
 
 
-.custom-scrollbar {
-    max-height: 500px; 
-    overflow-y: auto;
-  }
+
   
   /* Style for the scrollbar */
   .custom-scrollbar::-webkit-scrollbar {

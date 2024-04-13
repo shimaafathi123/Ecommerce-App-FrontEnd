@@ -5,6 +5,7 @@ import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 import { Link, useParams } from 'react-router-dom'; // Import Link and useParams from react-router-dom
 import './productList.css';
 import { FaHeart } from 'react-icons/fa';
+import CustomNavbar from '../Navbar/Navbar';
 
 const CategoryProductList = () => {
     const { categoryId } = useParams(); // Get categoryId from URL params
@@ -103,12 +104,14 @@ const CategoryProductList = () => {
     };
 
     return (
+        <>
+        <CustomNavbar/>
         <div className="product-list-container">
             <MDBContainer fluid className="my-5 text-center custom-scrollbar">
-                <h1 className="text-center mb-4">Welcome To FASHMART</h1>
                 <MDBRow className="g-4">{renderProducts()}</MDBRow>
             </MDBContainer>
         </div>
+        </>
     );
 };
 

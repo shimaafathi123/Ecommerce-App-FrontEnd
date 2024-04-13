@@ -7,7 +7,7 @@ import './productList.css';
 import { FaHeart } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 //import { addCartItem } from '../../store/cartSlice';
-
+import CustomNavbar from '../Navbar/Navbar';
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState({});
@@ -107,12 +107,17 @@ const ProductList = () => {
     
 
     return (
+<>
+<CustomNavbar/>
         <div className="product-list-container">
+                  
+
         <MDBContainer fluid className="my-5 text-center custom-scrollbar">
-          <h1 className="text-center mb-4">Welcome To FASHMART</h1>
           <MDBRow className="g-4">{renderProducts()}</MDBRow>
         </MDBContainer>
       </div>
+      </>
+
     );
 };
 
