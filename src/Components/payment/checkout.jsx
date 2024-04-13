@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import interceptorInstance from "../../axios/cartApi";
+import CustomNavbar from '../Navbar/Navbar';
 import * as Yup from 'yup';
 
 const payWithStripe = () => {
@@ -42,7 +43,9 @@ const CheckoutForm = () => {
   });
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
+    <>
+    <CustomNavbar/>
+    <div className="mt-5 d-flex justify-content-center align-items-center vh-100">
     <form onSubmit={formik.handleSubmit} className='w-75 m-5 border p-5 rounded-2 shadow mx-auto text-center'>
       <h2 className='mb-3 text-danger fw-bold fs-2'>Checkout</h2>
       <div className="mb-3">
@@ -88,6 +91,7 @@ const CheckoutForm = () => {
       </button>
     </form>
     </div>
+    </>
   );
 };
 
