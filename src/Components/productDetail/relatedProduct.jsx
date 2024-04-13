@@ -6,9 +6,12 @@ import { Card, Button } from 'react-bootstrap';
 import { FaCartPlus } from 'react-icons/fa'; // Import icons
 import { Link } from 'react-router-dom'; // Import Link component
 import './relatedProduct.css'; // Import CSS file
+import { useDispatch } from 'react-redux'; 
+import { addToCart  } from '../../store/cartSlice'
 
 const RelatedProducts = ({ productId }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchRelatedProducts = async () => {
@@ -23,6 +26,10 @@ const RelatedProducts = ({ productId }) => {
     fetchRelatedProducts();
   }, [productId]);
 
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product)); 
+  };
+
   return (
     <div className="related-products-container">
       <h3 className='product'>Related Products</h3>
@@ -35,7 +42,7 @@ const RelatedProducts = ({ productId }) => {
                 <Card.Title>{product.name}</Card.Title>
                 <Card.Text>{product.description}</Card.Text>
                 <Card.Text>Price: ${product.price}</Card.Text>
-                <Button variant="primary" className="custom-button">
+                <Button variant="primary" className="custom-button" onClick={() => handleAddToCart(product)}>
                   <FaCartPlus className="button-icon" /> Add to Cart
                 </Button>
               </Card.Body>
