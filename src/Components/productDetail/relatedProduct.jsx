@@ -7,7 +7,8 @@ import { FaCartPlus } from 'react-icons/fa'; // Import icons
 import { Link } from 'react-router-dom'; // Import Link component
 import './relatedProduct.css'; // Import CSS file
 import { useDispatch } from 'react-redux'; 
-import { addToCart  } from '../../store/cartSlice'
+//import { addToCart  } from '../../store/cartSlice'
+
 
 const RelatedProducts = ({ productId }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
