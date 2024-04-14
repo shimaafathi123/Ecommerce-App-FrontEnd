@@ -69,6 +69,11 @@ function Sidebar() {
                                 <Link to={'/editAccount'} className="fw-bold text-dark"><i className='fas fa-gear fa-spin me-2'></i> Setting</Link>
                             </div>
                         </li>
+                        <li className="list-group-item d-flex justify-content-between align-items-start">
+                        <div className="ms-2 me-auto">
+                            <Link to={'/home'} className="fw-bold text-dark"><i className='fas fa-gear fa-spin me-2'></i> Home</Link>
+                        </div>
+                       </li>
                         
                         <li className="list-group-item d-flex justify-content-between align-items-start">
                             <div className="ms-2 me-auto">
