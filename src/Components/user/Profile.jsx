@@ -3,7 +3,7 @@ import { Container, Form, Button, Alert } from 'react-bootstrap';
  
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProfile, updateProfile } from '../../store/profileSlice';
-
+import { useNavigate } from 'react-router-dom'; 
  
 
  
@@ -58,6 +58,7 @@ const Profile = () => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
    
 
   const handleChange = (e) => {
@@ -162,7 +163,7 @@ const Profile = () => {
         .then(() => {
           setIsSubmitting(false);
           setShowAlert(false); 
-        
+          navigate('/profile');
         })
         .catch((error) => {
           setIsSubmitting(false);
