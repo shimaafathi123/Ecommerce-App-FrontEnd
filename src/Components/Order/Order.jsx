@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 function Order() {
     const [orders, setOrders] = useState([]);
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const token = localStorage.getItem('token')
 
     useEffect(() => {
         async function fetchOrders() {
             const response = await fetch(`http://localhost:8000/orders`, {
                 headers: {
-                    Authorization: `Bearer ${userInfo.access}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
             const data = await response.json();
@@ -23,7 +24,7 @@ function Order() {
             const response = await fetch(`http://localhost:8000/orders/${orderId}/cancel`, {
                 method: 'POST',
                 headers: {
-                    Authorization: `Bearer ${userInfo.access}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
             if (response.ok) {
