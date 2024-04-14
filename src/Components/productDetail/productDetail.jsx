@@ -6,18 +6,36 @@ import { FaCartPlus, FaHeart } from 'react-icons/fa'; // Import icons
 import RelatedProducts from './relatedProduct';
 import './productDetail.css'; // Import CSS file
 import CustomNavbar from './Navbar';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 //import { addCartItem } from '../../store/cartSlice';
+import { setWishlist } from "../../store/wishlistSlice";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.wishlist.wishlist);
 
   // const dispatch = useDispatch();
   // const addItemToCart = (item) => {
   //     dispatch(addCartItem(item))
   // }
+  const addToWishlist = () => {
+  //   if (!user.username) {
+  //     navigate("/login");
+  //     return;
+  //   }
+    const existed = wishlist.findIndex((item) => item.product.id === id);
+    if (existed === -1) {
+      axios
+        .post(`users/wishlist/items/${id}`)
+        .then((response) => {
+          dispatch(setWishlist([...wishlist, response.data]));
+        })
+        .catch((error) => console.log(error));
+    } else return;
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -54,7 +72,7 @@ const ProductDetail = () => {
                     <FaCartPlus className="button-icon" onClick={() => addItemToCart(product)}/> Add to Cart
                   </Button>
                   <Button variant="secondary" className="custom-button">
-                    <FaHeart className="button-icon" /> Wishlist
+                    <FaHeart className="button-icon"onClick={() => addToWishlist(id)} /> Wishlist
                   </Button>
                 </div>
               </div>
