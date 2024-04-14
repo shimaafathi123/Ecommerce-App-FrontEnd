@@ -1,30 +1,9 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import interceptorInstance from "../../axios/cartApi";
 import CustomNavbar from '../Navbar/Navbar';
 import * as Yup from 'yup';
-
-const payWithStripe = (productId, token) => {
-  interceptorInstance
-    .post(`orders/checkout/`, { productId }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      // Check if the response is successful
-      if (response && response.data && response.data.url) {
-        // Redirect to stripe payment page
-        window.location.href = response.data.url;
-      } else {
-        console.error("Error during checkout: Unexpected response format");
-      }
-    })
-    .catch((error) => {
-      // Handle errors gracefully
-      console.error("Error during checkout:", error);
-    });
-};
 
 const CheckoutForm = () => {
   const navigate = useNavigate();
@@ -47,10 +26,33 @@ const CheckoutForm = () => {
     validationSchema: validationSchema,
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true); // Prevent multiple form submissions
+      console.log("Form submitted with values:", values); // Check if the form submission is triggered
       // dispatch(addUserInfo(values)); // If you need to dispatch any action before redirection
       payWithStripe(values.productId, token); // Pass the productId and token to the payWithStripe function
     },
   });
+
+  const payWithStripe = (productId, token) => {
+    interceptorInstance
+      .post(`orders/checkout/`, { productId }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        // Check if the response is successful
+        if (response && response.data && response.data.url) {
+          // Redirect to stripe payment page
+          window.location.href = response.data.url;
+        } else {
+          console.error("Error during checkout: Unexpected response format");
+        }
+      })
+      .catch((error) => {
+        // Handle errors gracefully
+        console.error("Error during checkout:", error);
+      });
+  };
 
   return (
     <>
@@ -92,9 +94,9 @@ const CheckoutForm = () => {
             {formik.errors.city && <div className="text-danger">{formik.errors.city}</div>}
           </div>
           <button
-            type="button"
+            type="submit" 
+            onClick={payWithStripe()}
             className="btn btn-danger font-semibold hover:bg-green-700 text-sm text-white uppercase w-full"
-            onClick={() => formik.handleSubmit()}
             disabled={formik.isSubmitting} // Disable button during form submission
           >
             {formik.isSubmitting ? "Processing..." : "Checkout"}
@@ -106,4 +108,3 @@ const CheckoutForm = () => {
 };
 
 export default CheckoutForm;
-
