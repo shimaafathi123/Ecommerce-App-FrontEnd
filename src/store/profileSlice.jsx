@@ -8,7 +8,7 @@ export const fetchProfile = createAsyncThunk(
     try {
       
 
-      // Make API call to fetch profile data
+      
       const response = await axiosInstance.get('/profile/');
         
       return response.data ;
@@ -24,7 +24,7 @@ export const updateProfile = createAsyncThunk(
   async (formData , { rejectWithValue }) => {
     try {
 
-      // Make API call to update the profile
+      
       const response = await axiosInstance.put('/profile/', formData);
       return response.data;
     } catch (error) {
@@ -42,7 +42,7 @@ export const resetpassword = createAsyncThunk(
   async (formData , { rejectWithValue }) => {
     try {
 
-      // Make API call to update the profile
+       
       console.log(formData)
       const response = await axiosInstance.post('/resetpass/', formData);
       

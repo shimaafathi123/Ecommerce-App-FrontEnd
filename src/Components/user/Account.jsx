@@ -1,12 +1,33 @@
  
 import Sidebar from './Sidebar'
 import { Link } from 'react-router-dom';
-//import * as JWT from 'jwt-decode';
+import { useState, useEffect } from 'react';
+import axios from '../../axios/axiosInstance';
+ 
+ 
 
 
 function Account() {
-  //  const token=localStorage.getItem('token');
-  //  const decoded = JWT(token);
+ 
+   
+  const [userInfo, setUserInfo] = useState('alaa');
+  //const [error, setError] = useState(null);
+
+  useEffect(() => {
+      const fetchUserInfo = async () => {
+          try {
+            console.log('alaa')
+              const response = await axios.get('/get_current_user_info/');
+              setUserInfo(response.data);
+              console.log(response.data)
+          } catch (error) {
+              //setError(error.message);
+              console.log(error)
+          }
+      };
+
+      fetchUserInfo();
+  }, []);
 
   return (
     <div>
@@ -24,7 +45,7 @@ function Account() {
                    
                     <section className="">
                       <div className="row rounded shadow p-3">
-                        <h2>Hi  </h2>{/*{ decoded ?.full_name}, */}
+                        <h2>Hi <span className="fw-bold text-primary">{userInfo.fullname}</span> </h2> {/*{ decoded ?.full_name}, */}
                         <div className="col-lg-12 mb-4 mb-lg-0 h-100">
                           From your account dashboard. you can easily check &amp; view
                           your <a href="">orders</a>, manage your{" "}

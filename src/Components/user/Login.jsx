@@ -23,7 +23,7 @@ const Login = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    setFormErrors({ ...formErrors, [name]: '' }); // Clear previous error when user starts typing
+    setFormErrors({ ...formErrors, [name]: '' });  
   };
 
   const handleSubmit = (e) => {

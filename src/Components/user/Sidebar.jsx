@@ -1,25 +1,32 @@
-//import {  useEffect, useState } from 'react';
+ 
 import { Link } from 'react-router-dom'
  
-//import * as JWT from 'jwt-decode';
+import { useState, useEffect } from 'react';
+import axios from '../../axios/axiosInstance';
 
  
 
 
 
 function Sidebar() {
-  //  const token=localStorage.getItem('token');
-   // const decoded = JWT(token);
-
-     
-   // let [loading, setLoading] = useState(true);
-
-    //useEffect(() => {
-     //   if (decoded) {
-      //      setLoading(false)
-      //  }
-
-   // })
+    const [userInfo, setUserInfo] = useState('alaa');
+    //const [error, setError] = useState(null);
+  
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+              console.log('alaa')
+                const response = await axios.get('/get_current_user_info/');
+                setUserInfo(response.data);
+                console.log(response.data)
+            } catch (error) {
+                //setError(error.message);
+                console.log(error)
+            }
+        };
+  
+        fetchUserInfo();
+    }, []);
 
     return (
         <div className="col-lg-3">
@@ -32,7 +39,7 @@ function Sidebar() {
                             alt=""
                         />
                         <div className="text-center">
-                            <h3 className="mb-0"> your sidebar</h3>
+                        <h3 className="mb-0">{userInfo?.fullname}</h3>
                             <p className="mt-0">
                                 <Link to="/editAccount"><i className='fas fa-edit me-2'></i> Edit Account</Link>
                             </p>
