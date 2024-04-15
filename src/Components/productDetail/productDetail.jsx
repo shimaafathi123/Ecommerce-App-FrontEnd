@@ -62,7 +62,9 @@ const ProductDetail = () => {
   //   if (!user.username) {
   //     navigate("/login");
   //     return;
-  //   }
+  //   }   
+    const token = localStorage.getItem('token');
+    console.log(token);
     const existed = wishlist.findIndex((item) => item.product.id === id);
     if (existed === -1) {
       axios
