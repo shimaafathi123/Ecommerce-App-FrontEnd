@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 function WishList() {
   const wishlist = useSelector((state) => state.wishlist.wishlist);
   const dispatch = useDispatch();
-
+ const token = localStorage.getItem('token')
   useEffect(() => {
     axios
       .get("http://localhost:8000/users/wishlist"{
