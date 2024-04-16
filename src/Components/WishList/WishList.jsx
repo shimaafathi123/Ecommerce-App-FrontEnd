@@ -9,10 +9,14 @@ import { ToastContainer } from "react-toastify";
 function WishList() {
   const wishlist = useSelector((state) => state.wishlist.wishlist);
   const dispatch = useDispatch();
-
+ const token = localStorage.getItem('token')
   useEffect(() => {
     axios
-      .get("http://localhost:8000/users/wishlist")
+      .get("http://localhost:8000/users/wishlist"{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+  })
       .then((response) => {
         console.log(response);
         dispatch(setWishlist(response.data[0].fav_items));
@@ -22,7 +26,11 @@ function WishList() {
 
   const removeItem = (item) => {
     axios
-      .delete(`http://localhost:8000/users/wishlist/items/${item.product.id}`)
+      .delete(`http://localhost:8000/users/wishlist/items/${item.product.id}`{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+  })
       .then((response) => {
         console.log(response)
         dispatch(

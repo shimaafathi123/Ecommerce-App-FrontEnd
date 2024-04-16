@@ -56,18 +56,24 @@ const ProductDetail = () => {
   //   if (!user.username) {
   //     navigate("/login");
   //     return;
-  //   }
+  //   }   
+    const token = localStorage.getItem('token');
+    console.log(token);
     const existed = wishlist.findIndex((item) => item.product.id === id);
     if (existed === -1) {
       axios
-        .post(`users/wishlist/items/${id}`)
+        .post(`http://127.0.0.1:8000/users/wishlist/items/${id}`,{
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
+          console.log(response)
           dispatch(setWishlist([...wishlist, response.data]));
         })
         .catch((error) => console.log(error));
     } else return;
   };
-
   useEffect(() => {
     const fetchProduct = async () => {
       try {
