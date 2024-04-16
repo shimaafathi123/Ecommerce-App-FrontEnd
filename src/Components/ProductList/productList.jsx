@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';  
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './productList.css';
 import { FaHeart } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addCartItem ,updateCartItemQuantity} from '../../store/cartSlice';
 //import { addCartItem } from '../../store/cartSlice';
 import CustomNavbar from '../Navbar/Navbar';
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState({});
     const dispatch = useDispatch();
+    const [message, setMessage] = useState('');
     // const addItemToCart = (item) => {
     //     dispatch(addCartItem(item))
     // }
+   
+    const token= localStorage.getItem('token');
+    const navigate=useNavigate()
 
+    
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -35,7 +44,26 @@ const ProductList = () => {
 
         fetchProducts();
     }, []);
-
+    const addToCartHandler = (id) => {
+        if (!token) {
+          navigate("/login");
+          return;
+        }
+        axios.post(`http://localhost:8000/cart/add-to-cart/`, { quantity: 1, product: id }, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        .then(() => {
+          dispatch(addCartItem(products));
+          setMessage('Item added to cart successfully');
+        })
+        .catch((error) => {
+          console.log(error);
+          setMessage('Failed to add item to cart');
+        });
+      };
+    
     const renderStarRating = (rating) => {
         const stars = [];
         const fullStars = Math.floor(rating);
@@ -94,7 +122,7 @@ const ProductList = () => {
                                     Rating: {renderStarRating(product.rating)}
                                 </div>
                                 <div className="product-card-buttons">
-                                    <button className="btn btn-primary" onClick={() => addItemToCart(product)}>Add to Cart</button>
+                                    <button className="btn btn-primary" onClick={() => addToCartHandler(product.id)}>Add to Cart</button>
                                     <button className="btn btn-secondary"><FaHeart /> Wishlist</button> {/* Replace text with heart icon */}
                                 </div>
                             </div>

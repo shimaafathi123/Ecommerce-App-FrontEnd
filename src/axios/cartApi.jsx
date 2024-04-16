@@ -1,20 +1,33 @@
 import axios from 'axios';
 
 const BASE_URL = 'http://127.0.0.1:8000';
+let jwtDecode;
 
-export async function fetchCart(userId, token) {
-  userId = localStorage.getItem('token'.userId)
-  const response = await axios.get(`${BASE_URL}/cart/cart/${userId}`, {
+import('jwt-decode')
+  .then((module) => {
+    jwtDecode = module.default;
+  })
+  .catch((error) => {
+    console.error('Error loading jwt-decode:', error);
+  });
+
+export async function fetchCart(id, token) {
+  if (!jwtDecode) {
+    console.error('jwt-decode is not loaded yet');
+    return;
+  }
+
+  token = localStorage.getItem('token');
+  id = jwtDecode(token).user_id;
+  console.log(id);
+  const response = await axios.get(`${BASE_URL}/cart/cart/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    
   });
   
   return response.data;
 }
-
-
 export async function removeFromCart(productId,token) {
   await axios.delete(`${BASE_URL}/cart/delete-cart-item/${productId}/`),{ headers: {
     Authorization: `Bearer ${token}`,
@@ -33,6 +46,7 @@ export async function decreaseItemQuantity(productId,token) {
   },};
 }
 export async function payment(token) {
+  token = localStorage.getItem(token)
   await axios.patch(`${BASE_URL}/orders/checkout`),{ headers: {
     Authorization: `Bearer ${token}`,
   },};

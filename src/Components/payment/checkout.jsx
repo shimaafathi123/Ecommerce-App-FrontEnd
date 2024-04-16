@@ -1,14 +1,15 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import interceptorInstance from "../../axios/cartApi";
+import axios from 'axios';
 import CustomNavbar from '../Navbar/Navbar';
 import * as Yup from 'yup';
 
 const CheckoutForm = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-
+  const { productId } = useParams(); // Use useParams to get the product ID
   const validationSchema = Yup.object({
     checkoutTitle: Yup.string().required('Checkout Title is required'),
     checkoutDetails: Yup.string().required('Checkout Details are required'),
@@ -27,31 +28,34 @@ const CheckoutForm = () => {
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true); // Prevent multiple form submissions
       console.log("Form submitted with values:", values); // Check if the form submission is triggered
-      // dispatch(addUserInfo(values)); // If you need to dispatch any action before redirection
-      payWithStripe(values.productId, token); // Pass the productId and token to the payWithStripe function
+      payWithStripe(productId, token); // Pass the productId and token to the payWithStripe function
     },
   });
 
-  const payWithStripe = (productId, token) => {
-    interceptorInstance
-      .post(`orders/checkout/`, { productId }, {
+  const payWithStripe = async (productId, token) => {
+    
+    try {
+      const response = await  axios.post(`http://localhost:8000/orders/checkout/`, {
+        // Pass the necessary data to the backend
+        product: productId, // Use the productId obtained from the URL
+        token: token, // Assuming `token` is the user token
+      }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      })
-      .then((response) => {
-        // Check if the response is successful
-        if (response && response.data && response.data.url) {
-          // Redirect to stripe payment page
-          window.location.href = response.data.url;
-        } else {
-          console.error("Error during checkout: Unexpected response format");
-        }
-      })
-      .catch((error) => {
-        // Handle errors gracefully
-        console.error("Error during checkout:", error);
       });
+      console.log(response);
+      // Check if the response is successful
+      if (response && response.data && response.data.url) {
+        // Redirect to Stripe payment page
+        window.location.href = response.data.url;
+      } else {
+        console.error("Error during checkout: Unexpected response format");
+      }
+    } catch (error) {
+      // Handle errors gracefully
+      console.error("Error during checkout:", error);
+    }
   };
 
   return (
@@ -95,7 +99,6 @@ const CheckoutForm = () => {
           </div>
           <button
             type="submit" 
-            onClick={payWithStripe()}
             className="btn btn-danger font-semibold hover:bg-green-700 text-sm text-white uppercase w-full"
             disabled={formik.isSubmitting} // Disable button during form submission
           >
@@ -105,6 +108,7 @@ const CheckoutForm = () => {
       </div>
     </>
   );
+  
 };
 
 export default CheckoutForm;
