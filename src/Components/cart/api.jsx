@@ -33,16 +33,16 @@ export const updateCartItem = async (itemId,token, quantity) => {
   return data;
 };
 
-export const fetchCartDetail = async (cartId, token) => {
-    const response = await fetch(`${API_BASE_URL}cart/${cartId}/`, {
-      method: 'GET', // Use GET method to fetch cart details
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-  return data;
+export const fetchCart = async (userId, token) => {
+  const response = await fetch(`${API_BASE_URL}cart/${userId}/`, {
+    method: 'GET', // Use GET method to fetch cart details
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  const data = await response.json();
+return data;
 };
 export const deleteCartItem = async (itemId,token) => {
   const response = await fetch(`${API_BASE_URL}delete-cart-item/${itemId}/`, {
