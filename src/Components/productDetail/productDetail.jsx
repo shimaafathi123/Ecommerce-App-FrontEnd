@@ -38,7 +38,7 @@ const ProductDetail = () => {
       return;
     }
 
-    axios.post(`http://localhost:8000/cart/add-to-cart/`, { quantity: 1, product: id }, {
+    axios.post(`https://ecommerce-app-backend-ol18.onrender.com/cart/add-to-cart/`, { quantity: 1, product: id }, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -62,7 +62,7 @@ const ProductDetail = () => {
     const existed = wishlist.findIndex((item) => item.product.id === id);
     if (existed === -1) {
       axios
-        .post(`http://127.0.0.1:8000/users/wishlist/items/${id}`,{
+        .post(`https://ecommerce-app-backend-ol18.onrender.com/users/wishlist/items/${id}`,{
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -77,7 +77,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/products/${id}/`);
+        const response = await axios.get(`https://ecommerce-app-backend-ol18.onrender.com/products/${id}/`);
         setProduct(response.data);
         setLoading(false);
       } catch (error) {

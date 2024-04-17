@@ -17,7 +17,7 @@ const RelatedProducts = ({ productId }) => {
   useEffect(() => {
     const fetchRelatedProducts = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/products/${productId}/related`);
+        const response = await axios.get(`https://ecommerce-app-backend-ol18.onrender.com/products/${productId}/related`);
         setRelatedProducts(response.data);
       } catch (error) {
         console.error('Error fetching related products:', error);

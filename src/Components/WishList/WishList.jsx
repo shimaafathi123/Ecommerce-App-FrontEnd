@@ -12,7 +12,7 @@ function WishList() {
  const token = localStorage.getItem('token')
   useEffect(() => {
     axios
-      .get("http://localhost:8000/users/wishlist",{
+      .get("https://ecommerce-app-backend-ol18.onrender.com/users/wishlist",{
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -26,7 +26,7 @@ function WishList() {
 
   const removeItem = (item) => {
     axios
-      .delete(`http://localhost:8000/users/wishlist/items/${item.product.id}`,{
+      .delete(`https://ecommerce-app-backend-ol18.onrender.com/users/wishlist/items/${item.product.id}`,{
       headers: {
         Authorization: `Bearer ${token}`,
       },

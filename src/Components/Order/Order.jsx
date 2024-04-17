@@ -8,7 +8,7 @@ function Order() {
 
     useEffect(() => {
         async function fetchOrders() {
-            const response = await fetch(`http://localhost:8000/orders`, {
+            const response = await fetch(`https://ecommerce-app-backend-ol18.onrender.com/orders`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -21,7 +21,7 @@ function Order() {
 
     const cancelOrder = async (orderId) => {
         try {
-            const response = await fetch(`http://localhost:8000/orders/${orderId}/cancel`, {
+            const response = await fetch(`https://ecommerce-app-backend-ol18.onrender.com/orders/${orderId}/cancel`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${token}`,

@@ -15,7 +15,7 @@ const CategoryProductList = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                let apiUrl = 'http://127.0.0.1:8000/products/';
+                let apiUrl = 'https://ecommerce-app-backend-ol18.onrender.com/products/';
                 if (categoryId) {
                     apiUrl += `category/${categoryId}/`; 
                 }
@@ -23,7 +23,7 @@ const CategoryProductList = () => {
                 setProducts(productResponse.data);
 
                 // Fetch categories separately
-                const categoryResponse = await axios.get('http://127.0.0.1:8000/categories/');
+                const categoryResponse = await axios.get('https://ecommerce-app-backend-ol18.onrender.com/categories/');
                 setCategories(categoryResponse.data);
             } catch (error) {
                 console.error('Error fetching products:', error);

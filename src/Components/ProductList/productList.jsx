@@ -28,10 +28,10 @@ const ProductList = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const productResponse = await axios.get('http://127.0.0.1:8000/products/');
+                const productResponse = await axios.get('https://ecommerce-app-backend-ol18.onrender.com/products/');
                 setProducts(productResponse.data);
 
-                const categoryResponse = await axios.get('http://127.0.0.1:8000/categories/');
+                const categoryResponse = await axios.get('https://ecommerce-app-backend-ol18.onrender.com/categories/');
                 const categoriesData = categoryResponse.data.reduce((acc, category) => {
                     acc[category.id] = category.name;
                     return acc;
@@ -49,7 +49,7 @@ const ProductList = () => {
           navigate("/login");
           return;
         }
-        axios.post(`http://localhost:8000/cart/add-to-cart/`, { quantity: 1, product: id }, {
+        axios.post(`https://ecommerce-app-backend-ol18.onrender.com/cart/add-to-cart/`, { quantity: 1, product: id }, {
           headers: {
             Authorization: `Bearer ${token}`
           }

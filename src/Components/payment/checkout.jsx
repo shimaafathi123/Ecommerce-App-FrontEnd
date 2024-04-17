@@ -35,7 +35,7 @@ const CheckoutForm = () => {
   const payWithStripe = async (productId, token) => {
     
     try {
-      const response = await  axios.post(`http://localhost:8000/orders/checkout/`, {
+      const response = await  axios.post(`https://ecommerce-app-backend-ol18.onrender.com/orders/checkout/`, {
         // Pass the necessary data to the backend
         product: productId, // Use the productId obtained from the URL
         token: token, // Assuming `token` is the user token

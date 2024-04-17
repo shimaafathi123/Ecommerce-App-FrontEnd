@@ -11,7 +11,7 @@
 //   }, []);
 
 //   const fetchCartData = (cartId) => {
-//     fetch(`http://127.0.0.1:8000/cart/cart/${cartId}/`) // Assuming your Django endpoint for fetching cart data is '/api/cart/'
+//     fetch(`https://ecommerce-app-backend-ol18.onrender.com/cart/cart/${cartId}/`) // Assuming your Django endpoint for fetching cart data is '/api/cart/'
 //       .then(response => response.json())
 //       .then(data => {
 //         setCartItems(data.cart);

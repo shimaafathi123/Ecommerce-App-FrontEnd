@@ -10,7 +10,7 @@ const Category = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/categories/');
+                const response = await axios.get('https://ecommerce-app-backend-ol18.onrender.com/categories/');
                 setCategories(response.data);
             } catch (error) {
                 console.error('Error fetching categories:', error);

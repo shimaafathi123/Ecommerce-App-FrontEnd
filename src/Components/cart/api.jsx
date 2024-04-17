@@ -1,6 +1,6 @@
 // api.js
 
-const API_BASE_URL = 'http://127.0.0.1:8000/cart/';
+const API_BASE_URL = 'https://ecommerce-app-backend-ol18.onrender.com/cart/';
 
 export const addToCart = async (productId,token, quantity = 1) => {
   const response = await fetch(`${API_BASE_URL}add-to-cart/`, {
