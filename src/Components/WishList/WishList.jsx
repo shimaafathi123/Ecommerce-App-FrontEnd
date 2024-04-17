@@ -12,7 +12,7 @@ function WishList() {
  const token = localStorage.getItem('token')
   useEffect(() => {
     axios
-      .get("https://ecommerce-app-backend-ol18.onrender.com/users/wishlist",{
+      .get("https://ecommerce-app-backend-ol18.onrender.com/users/wishlist/",{
       headers: {
         Authorization: `Bearer ${token}`,
       },
