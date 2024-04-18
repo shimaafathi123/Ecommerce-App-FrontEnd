@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
-import interceptorInstance from "../../axios/cartApi";
 import axios from 'axios';
 import CustomNavbar from '../Navbar/Navbar';
 import * as Yup from 'yup';
@@ -11,7 +10,6 @@ const CheckoutForm = () => {
   const token = localStorage.getItem('token');
   const { productId } = useParams(); // Use useParams to get the product ID
   const validationSchema = Yup.object({
-    checkoutTitle: Yup.string().required('Checkout Title is required'),
     checkoutDetails: Yup.string().required('Checkout Details are required'),
     phone: Yup.string().required('Phone number is required'),
     city: Yup.string().required('City is required'),
@@ -19,44 +17,40 @@ const CheckoutForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      checkoutTitle: '',
       checkoutDetails: '',
       phone: '',
       city: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values, { setSubmitting }) => {
+    onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true); // Prevent multiple form submissions
       console.log("Form submitted with values:", values); // Check if the form submission is triggered
-      payWithStripe(productId, token); // Pass the productId and token to the payWithStripe function
+      try {
+        const response = await axios.post(`https://ecommerce-app-backend-ol18.onrender.com/orders/checkout/`, {
+          // Pass the necessary data to the backend
+          product: productId, // Use the productId obtained from the URL
+          checkoutDetails: values.checkoutDetails,
+          phone: values.phone,
+          city: values.city,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(response);
+        // Check if the response is successful
+        if (response && response.data && response.data.url) {
+          // Redirect to Stripe payment page
+          window.location.href = response.data.url;
+        } else {
+          console.error("Error during checkout: Unexpected response format");
+        }
+      } catch (error) {
+        // Handle errors gracefully
+        console.error("Error during checkout:", error);
+      }
     },
   });
-
-  const payWithStripe = async (productId, token) => {
-    
-    try {
-      const response = await  axios.post(`https://ecommerce-app-backend-ol18.onrender.com/orders/checkout/`, {
-        // Pass the necessary data to the backend
-        product: productId, // Use the productId obtained from the URL
-        token: token, // Assuming `token` is the user token
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(response);
-      // Check if the response is successful
-      if (response && response.data && response.data.url) {
-        // Redirect to Stripe payment page
-        window.location.href = response.data.url;
-      } else {
-        console.error("Error during checkout: Unexpected response format");
-      }
-    } catch (error) {
-      // Handle errors gracefully
-      console.error("Error during checkout:", error);
-    }
-  };
 
   return (
     <>
@@ -108,7 +102,6 @@ const CheckoutForm = () => {
       </div>
     </>
   );
-  
 };
 
 export default CheckoutForm;

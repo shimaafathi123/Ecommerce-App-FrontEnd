@@ -5,7 +5,8 @@ export const cartSlice = createSlice({
     initialState: { cart: [] },
     reducers: {
         addCartItem: (state, action) => {
-            const found = state.cart.find((item) => item.itemData.id === action.payload.id);
+            const { id } = action.payload;
+            const found = state.cart.find((item) => item.itemData.id === id);
             if (found) {
                 found.quantity += 1;
             } else {
@@ -16,20 +17,23 @@ export const cartSlice = createSlice({
             }
         },
         removeCartItem: (state, action) => {
-            state.cart = state.cart.filter(item => item.itemData.id !== action.payload.id);
+            const { id } = action.payload;
+            state.cart = state.cart.filter(item => item.itemData.id !== id);
         },
         updateCartItemQuantity: (state, action) => {
             const { id, quantity } = action.payload;
             const found = state.cart.find(cartItem => cartItem.itemData.id === id);
             if (found) {
                 found.quantity = quantity;
+            } else {
+                console.error(`Item with ID ${id} not found in the cart.`);
             }
         },
         clearCart: (state) => {
             state.cart = [];
         },
         setCart: (state, action) => {
-            state.cart = action.payload;
+            state.cart = action.payload.cart_items;
         },
     },
 });

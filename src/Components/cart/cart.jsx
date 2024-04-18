@@ -201,10 +201,12 @@
 //     );
 // }
 
+// UserCart.js
+// UserCart component
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CartItem from './CartItem';
-import { clearCart } from '../../store/cartSlice';
+import { clearCart, updateCartItemQuantity, removeCartItem } from '../../store/cartSlice';
 import { Link } from 'react-router-dom';
 import PaginationComponent from '../pagination/pagination';
 import CustomNavbar from '../Navbar/Navbar';
@@ -212,51 +214,42 @@ import { fetchCart } from '../../axios/cartApi';
 import { setCart } from '../../store/cartSlice';
 
 export default function UserCart() {
-    // Retrieve cart state from Redux store
     const { cart } = useSelector((state) => state.cart);
-
-    // Initialize state variables
     const [totalPrice, setTotalPrice] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
-
     const dispatch = useDispatch();
 
     useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const token = localStorage.getItem('token');
-          console.log(token);
-          // Check if token and username are not null
-          if (token ) {
-            
-            const cartData = await fetchCart(token);
-            dispatch(setCart(cartData)); // Assuming setCart action updates cart state
-          } else {
-            // Handle case where token or username is null
-            console.error('Token or username is null');
-          }
-        } catch (error) {
-          console.error('Error fetching cart data:', error);
-        }
-      };
-    
-      fetchData();
+        const fetchData = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (token) {
+                    const response = await fetchCart(token);
+                    dispatch(setCart(response)); 
+                } else {
+                    console.error('Token is null');
+                }
+            } catch (error) {
+                console.error('Error fetching cart data:', error);
+            }
+        };
+        fetchData();
     }, [dispatch]);
-    
 
     useEffect(() => {
-      if (cart && cart.length > 0) {
-          let total = 0;
-          cart.forEach((item) => {
-              total += item.itemData.price * item.quantity;
-          });
-          setTotalPrice(total);
-      } else {
-          setTotalPrice(0); // Reset total price if cart is null or empty
-      }
-  }, [cart]);
-  
+        if (cart && cart.cart_items && cart.cart_items.length > 0) {
+            let total = 0;
+            cart.cart_items.forEach((item) => {
+                if (item.product && item.product.price) {
+                    total += parseFloat(item.product.price) * item.quantity;
+                }
+            });
+            setTotalPrice(total);
+        } else {
+            setTotalPrice(0);
+        }
+    }, [cart]);
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -266,13 +259,22 @@ export default function UserCart() {
         dispatch(clearCart()); 
     };
 
+    const decreaseQuantity = (itemId) => {
+        dispatch(updateCartItemQuantity({ id: itemId, quantity: -1 }));
+    };
+
+    const increaseQuantity = (itemId) => {
+        dispatch(updateCartItemQuantity({ id: itemId, quantity: 1 }));
+    };
+
+    const removeItemFromCart = (itemId) => {
+        dispatch(removeCartItem(itemId));
+    };
+
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentCart = cart ? cart.slice(indexOfFirstItem, indexOfLastItem) : [];
-
-    const totalPages = cart ? Math.ceil(cart.length / itemsPerPage) : 0;
-
-    
+    const currentCart = cart && cart.cart_items ? cart.cart_items.slice(indexOfFirstItem, indexOfLastItem) : [];
+    const totalPages = cart && cart.cart_items ? Math.ceil(cart.cart_items.length / itemsPerPage) : 0;
     const isLastPage = currentPage === totalPages;
 
     return (
@@ -296,7 +298,13 @@ export default function UserCart() {
                     <tbody>
                         {currentCart.length > 0 ? (
                             currentCart.map((item) => (
-                                <CartItem key={item.id} item={item} />
+                                <CartItem
+                                    key={item.id}
+                                    item={item}
+                                    decreaseQuantity={decreaseQuantity}
+                                    increaseQuantity={increaseQuantity}
+                                    removeItemFromCart={removeItemFromCart}
+                                />
                             ))
                         ) : (
                             <tr>
@@ -307,11 +315,11 @@ export default function UserCart() {
                         )}
                     </tbody>
                 </table>
-                {isLastPage && cart.length !== 0 && (
+                {isLastPage && cart && cart.cart_items && cart.cart_items.length !== 0 && (
                     <div className="container total m-4 ">
                         <div className="row">
                             <div className="col fs-2 text-success">Total</div>
-                            <div className="col fs-2 text-success">${totalPrice}</div>
+                            <div className="col fs-2 text-success">${totalPrice.toFixed(2)}</div>
                             <Link to="/checkout">
                                 <button className="border-2 w-25 btn btn-success">Payment</button>
                             </Link>

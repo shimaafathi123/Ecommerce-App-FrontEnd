@@ -53,7 +53,7 @@ function Sidebar() {
                         </li>
                         <li className="list-group-item d-flex justify-content-between align-items-start">
                             <div className="ms-2 me-auto">
-                                <Link to={'/orders'} className="fw-bold text-dark"><i className='fas fa-shopping-cart me-2'></i>Orders</Link>
+                                <Link to={'/order'} className="fw-bold text-dark"><i className='fas fa-shopping-cart me-2'></i>Orders</Link>
                             </div>
                             <span className="badge bg-primary rounded-pill">14</span>
                         </li>
