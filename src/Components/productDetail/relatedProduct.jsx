@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 //import { addToCart  } from '../../store/cartSlice'
 
 
+// eslint-disable-next-line react/prop-types
 const RelatedProducts = ({ productId }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const dispatch = useDispatch();
