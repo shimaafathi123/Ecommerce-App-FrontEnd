@@ -6,8 +6,9 @@ import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';  
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './productList.css';
+import { setWishlist } from "../../store/wishlistSlice";
 import { FaHeart } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addCartItem ,updateCartItemQuantity} from '../../store/cartSlice';
 //import { addCartItem } from '../../store/cartSlice';
@@ -17,10 +18,11 @@ const ProductList = () => {
     const [categories, setCategories] = useState({});
     const dispatch = useDispatch();
     const [message, setMessage] = useState('');
+    const wishlist = useSelector((state) => state.wishlist.wishlist);
+
     // const addItemToCart = (item) => {
     //     dispatch(addCartItem(item))
     // }
-   
     const token= localStorage.getItem('token');
     const navigate=useNavigate()
 
@@ -28,10 +30,10 @@ const ProductList = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const productResponse = await axios.get('https://ecommerce-app-backend-ol18.onrender.com/products/');
+                const productResponse = await axios.get('http://127.0.0.1:8000/products/');
                 setProducts(productResponse.data);
 
-                const categoryResponse = await axios.get('https://ecommerce-app-backend-ol18.onrender.com/categories/');
+                const categoryResponse = await axios.get('http://127.0.0.1:8000/categories/');
                 const categoriesData = categoryResponse.data.reduce((acc, category) => {
                     acc[category.id] = category.name;
                     return acc;
@@ -49,7 +51,7 @@ const ProductList = () => {
           navigate("/login");
           return;
         }
-        axios.post(`https://ecommerce-app-backend-ol18.onrender.com/cart/add-to-cart/`, { quantity: 1, product: id }, {
+        axios.post(`http://127.0.0.1:8000/cart/add-to-cart/`, { quantity: 1, product: id }, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -62,6 +64,28 @@ const ProductList = () => {
           console.log(error);
           setMessage('Failed to add item to cart');
         });
+      };
+
+      const addToWishlist = () => {
+        if (!token) {
+          navigate("/login");
+          return;
+        } 
+         console.log(token);
+        const existed = wishlist.findIndex((item) => item.product.id === id);
+        if (existed === -1) {
+          axios
+            .post(`http://127.0.0.1:8000/users/wishlist/items/${id}`,{
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+            .then((response) => {
+              console.log(response)
+              dispatch(setWishlist([...wishlist, response.data]));
+            })
+            .catch((error) => console.log(error));
+        } else return;
       };
     
     const renderStarRating = (rating) => {
@@ -125,7 +149,7 @@ const ProductList = () => {
                         </div>
                         <div className="product-card-buttons">
                             <button className="btn btn-primary" onClick={() => addToCartHandler(product.id)}>Add to Cart</button>
-                            <button className="btn btn-secondary"><FaHeart /> Wishlist</button> {/* Replace text with heart icon */}
+                            <button className="btn btn-secondary" onClick={() => addToWishlist(product.id)}><FaHeart /> Wishlist</button> 
                         </div>
                     </div>
                 </MDBCol>
