@@ -7,8 +7,8 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faHeart, faUser } from '@fortawesome/free-solid-svg-icons'; // Import the icons
-import Category from '../Category/category';
 import '../Navbar/Navbar.css';
+import Category from './Category/category';
 
 function UserNavbar() {
   return (

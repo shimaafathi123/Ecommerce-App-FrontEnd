@@ -17,6 +17,8 @@ import CheckoutForm from "../payment/checkout"
 import ProductList from "../ProductList/productList";
 import CategoryProductList from "../ProductList/CategoryProductList";
 import UserHome from "../user/userHome";
+import ProLis from "../user/ProductList/productList";
+import CatPro from "../user/ProductList/CategoryProductList";
 
 function Layout() {
     return (
@@ -99,7 +101,15 @@ function Layout() {
         {
           path:"/home",
           element:<UserHome/>
-        }
+        },
+        {
+          path:"/user/all",
+          element:<ProLis/>
+        },
+        {
+          path:"/user/category/:categoryId",
+          element:<CatPro/>
+        },
       ],
     },
   ]);
