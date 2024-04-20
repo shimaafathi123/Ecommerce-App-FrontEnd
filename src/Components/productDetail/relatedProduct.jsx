@@ -14,19 +14,19 @@ import { useDispatch } from 'react-redux';
 const RelatedProducts = ({ productId }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const dispatch = useDispatch();
-
   useEffect(() => {
     const fetchRelatedProducts = async () => {
       try {
-        const response = await axios.get(`https://ecommerce-app-backend-ol18.onrender.com/products/${productId}/related`);
+        const response = await axios.get(`https://ecommerce-app-backend-ol18.onrender.com/products/${productId}/related/`);
         setRelatedProducts(response.data);
       } catch (error) {
         console.error('Error fetching related products:', error);
       }
     };
-
+  
     fetchRelatedProducts();
   }, [productId]);
+  
 
   // const handleAddToCart = (product) => {
   //   dispatch(addToCart(product)); 
