@@ -11,9 +11,12 @@ const CheckoutForm = () => {
   const { productId } = useParams(); // Use useParams to get the product ID
   const validationSchema = Yup.object({
     checkoutDetails: Yup.string().required('Checkout Details are required'),
-    phone: Yup.string().required('Phone number is required'),
-    city: Yup.string().required('City is required'),
-  });
+    phone: Yup.string()
+    .required('Phone number is required')
+    .matches(/^(012|011|010|015)\d{8}$/, 'Invalid phone number'), // Custom regex validation
+  city: Yup.string().required('City is required'),
+});
+   
 
   const formik = useFormik({
     initialValues: {
