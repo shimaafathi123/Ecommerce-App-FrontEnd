@@ -35,14 +35,7 @@ function CustomNavbar() {
             />
             <Button variant="outline-success">Search</Button>
           </Form>
-          <Nav>
-            <Nav.Link href="/cart" className="text-white">
-              <FontAwesomeIcon icon={faShoppingCart} />
-            </Nav.Link>
-            <Nav.Link href="/wishlist" className="text-white">
-              <FontAwesomeIcon icon={faHeart} />
-            </Nav.Link>
-          </Nav>
+          
         </NavbarBootstrap.Collapse>
       </Container>
     </NavbarBootstrap>
