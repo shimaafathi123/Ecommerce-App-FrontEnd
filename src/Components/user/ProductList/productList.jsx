@@ -107,27 +107,27 @@ const ProLis = () => {
     
             return (
                 <MDBCol key={product.id} xs={12} sm={6} md={4} lg={3}>
-                    <Link to={`/user/products/${product.id}`} className="product-link"> {/* Link to product detail page */}
-                        <div className="product-card">
-                            <div className={`product-image ${quantityClass}`}>
+                    <div className="product-card">
+                        <div className={`product-image ${quantityClass}`}>
+                            <Link to={`/products/${product.id}`} className="product-link"> {/* Link to product detail page */}
                                 <img src={product.image} alt={product.name} />
                                 <p className={`product-quantity ${quantityClass}`}>{quantityText}: {product.quantity}</p>
-                            </div>
-                            <div className="product-card-content">
-                                <h5 className="product-card-title">{product.name}</h5>
-                                <p className="product-card-description">{product.description}</p>
-                                <p className="product-card-price">Price: {product.price}$</p>
-                                <p className="product-card-category">Category: {getCategoryNameById(product.category)}</p>
-                                <div className="product-card-rating">
-                                    Rating: {renderStarRating(product.rating)}
-                                </div>
-                                <div className="product-card-buttons">
-                                    <button className="btn btn-primary" onClick={() => addToCartHandler(product.id)}>Add to Cart</button>
-                                    <button className="btn btn-secondary"><FaHeart /> Wishlist</button> {/* Replace text with heart icon */}
-                                </div>
+                            </Link>
+                        </div>
+                        <div className="product-card-content">
+                            <h5 className="product-card-title">{product.name}</h5>
+                            <p className="product-card-description">{product.description}</p>
+                            <p className="product-card-price">Price: {product.price}$</p>
+                            <p className="product-card-category">Category: {getCategoryNameById(product.category)}</p>
+                            <div className="product-card-rating">
+                                Rating: {renderStarRating(product.rating)}
                             </div>
                         </div>
-                    </Link>
+                        <div className="product-card-buttons">
+                            <button className="btn btn-primary" onClick={() => addToCartHandler(product.id)}>Add to Cart</button>
+                            <button className="btn btn-secondary"><FaHeart /> Wishlist</button> {/* Replace text with heart icon */}
+                        </div>
+                    </div>
                 </MDBCol>
             );
         });
