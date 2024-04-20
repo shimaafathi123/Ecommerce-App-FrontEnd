@@ -76,7 +76,7 @@ const CatPro = () => {
     
             return (
                 <MDBCol key={product.id} xs={12} sm={6} md={4} lg={3}>
-                    <Link to={`/products/${product.id}`} className="product-link">
+                    <Link to={`/user/products/${product.id}`} className="product-link">
                         <div className="product-card">
                             <div className={`product-image ${quantityClass}`}>
                                 <img src={product.image} alt={product.name} />

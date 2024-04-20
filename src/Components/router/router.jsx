@@ -9,7 +9,7 @@ import Account from "../user/Account"
 import Logout from "../user/Logout"
 import ResetPass from "../user/ResetPass"
 import UserAdminPanel from "../admin/UserAdminPanel"
-
+import ProDe from "../user/productDetail/productDetail";
 import ProductDetail from "../productDetail/productDetail";
 import WishList from "../WishList/WishList";
 import Order from "../Order/Order";
@@ -109,6 +109,10 @@ function Layout() {
         {
           path:"/user/category/:categoryId",
           element:<CatPro/>
+        },
+        {
+          path:"/user/products/:id",
+          element:<ProDe/>
         },
       ],
     },
