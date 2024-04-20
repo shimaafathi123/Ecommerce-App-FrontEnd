@@ -25,9 +25,9 @@ updateCartItemQuantity: (state, action) => {
     const { id, action: updateAction } = action.payload;
     const updatedCartItems = state.cart.cart_items.map(item => {
         if (item.id === id) {
-            if (updateAction === "INCREMENT") {
+            if (updateAction === "INCREASE") {
                 return { ...item, quantity: item.quantity + 1 };
-            } else if (updateAction === "DECREMENT" && item.quantity > 1) {
+            } else if (updateAction === "DECREASE" && item.quantity > 1) {
                 return { ...item, quantity: item.quantity - 1 };
             }
         }
@@ -46,5 +46,6 @@ updateCartItemQuantity: (state, action) => {
     },
 });
 
+export const selectCartItems = (state) => state.cart.cart_items;
 export const { addCartItem, removeCartItem, updateCartItemQuantity, clearCart, setCart } = cartSlice.actions;
 export default cartSlice.reducer;

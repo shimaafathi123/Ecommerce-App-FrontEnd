@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CartItem from './CartItem';
-import { clearCart, updateCartItemQuantity, removeCartItem, setCart } from '../../store/cartSlice';
+import { clearCart,  removeCartItem, setCart   ,updateCartItemQuantity } from '../../store/cartSlice';
 import { Link } from 'react-router-dom';
-import { increaseItemQuantity,decreaseItemQuantity } from '../../axios/cartApi';
 import PaginationComponent from '../pagination/pagination';
 import CustomNavbar from '../Navbar/Navbar';
-import { fetchCart, removeFromCart } from '../../axios/cartApi'; // Import removeFromCart function
+import { fetchCart, removeFromCart,decreaseItemQuantity,increaseItemQuantity } from '../../axios/cartApi'; // Import removeFromCart function
 
 export default function UserCart() {
     const cart = useSelector((state) => state.cart.cart); 
@@ -65,25 +64,31 @@ export default function UserCart() {
 
 
 
-    const increaseQuantity = async (itemId) => {
-        try {
-            await increaseItemQuantity(itemId);
-            dispatch(updateCartItemQuantity({ id: itemId, action: 'INCREMENT' }));
-        } catch (error) {
-            console.error('Error increasing item quantity:', error);
-        }
-    };
-    
-    const decreaseQuantity = async (itemId) => {
-        try {
-            await decreaseItemQuantity(itemId);
-            dispatch(updateCartItemQuantity({ id: itemId, action: 'DECREMENT' }));
-        } catch (error) {
-            console.error('Error decreasing item quantity:', error);
-        }
-    };
+   // cart.jsx
+// cart.jsx
+const increaseQuantity = async (itemId,productId) => {
+    try {
+        await increaseItemQuantity(itemId, productId);
+        dispatch(updateCartItemQuantity({ id: itemId, action: 'INCREASE' }));
+        console.log(itemId);
 
-      
+    } catch (error) {
+        console.error('Error increasing item quantity:', error);
+    }
+};
+
+const decreaseQuantity = async (itemId,productId) => {
+    try {
+        await decreaseItemQuantity(itemId,productId);
+        dispatch(updateCartItemQuantity({ id: itemId, action: 'DECREASE' }));
+    } catch (error) {
+        console.error('Error decreasing item quantity:', error);
+    }
+};
+
+
+
+ 
     
     const removeItemFromCart = async (itemId) => {
         try {
@@ -133,8 +138,8 @@ export default function UserCart() {
                                     <CartItem
                                         key={item.id}
                                         item={item}
-                                        increaseQuantity={() => increaseQuantity(item.id)} // Pass the itemId as an argument
-                                         decreaseQuantity={() => decreaseQuantity(item.id)} // Pass the itemId as an argument
+                                        increaseQuantity={() => increaseQuantity(item.id,item.product.id)} // Pass the itemId as an argument
+                                         decreaseQuantity={() => decreaseQuantity(item.id,item.product.id)} // Pass the itemId as an argument
                                         removeItemFromCart={removeItemFromCart}
                                     />
                                 ))
