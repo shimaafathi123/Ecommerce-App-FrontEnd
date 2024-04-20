@@ -9,9 +9,7 @@ import CustomNavbar from './Navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCartItem ,updateCartItemQuantity} from '../../store/cartSlice';
 import { setWishlist } from "../../store/wishlistSlice";
-import interceptorInstance from '../../axios/cartApi';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../../store/loginSlice';
 // import { addToCart } from '../cart/api';
 
 const ProductDetail = () => {
@@ -38,7 +36,7 @@ const ProductDetail = () => {
       return;
     }
 
-    axios.post(`https://ecommerce-app-backend-ol18.onrender.com/cart/add-to-cart/`, { quantity: 1, product: id }, {
+    axios.post(`http://127.0.0.1:8000/cart/add-to-cart/`, { quantity: 1, product: id }, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -52,17 +50,17 @@ const ProductDetail = () => {
       setMessage('Failed to add item to cart');
     });
   };
+
   const addToWishlist = () => {
-  //   if (!user.username) {
-  //     navigate("/login");
-  //     return;
-  //   }   
-    const token = localStorage.getItem('token');
-    console.log(token);
+    if (!token) {
+      navigate("/login");
+      return;
+    } 
+     console.log(token);
     const existed = wishlist.findIndex((item) => item.product.id === id);
     if (existed === -1) {
       axios
-        .post(`https://ecommerce-app-backend-ol18.onrender.com/users/wishlist/items/${id}`,{
+        .post(`http://127.0.0.1:8000/users/wishlist/items/${id}`,{
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -77,7 +75,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`https://ecommerce-app-backend-ol18.onrender.com/products/${id}/`);
+        const response = await axios.get(`http://127.0.0.1:8000/products/${id}/`);
         setProduct(response.data);
         setLoading(false);
       } catch (error) {
@@ -117,8 +115,8 @@ const ProductDetail = () => {
                   <Button variant="primary" className="custom-button" onClick={() => addToCartHandler()}>
                     <FaCartPlus className="button-icon" /> Add to Cart
                   </Button>
-                  <Button variant="secondary" className="custom-button">
-                    <FaHeart className="button-icon"onClick={() => addToWishlist(id)} /> Wishlist
+                  <Button variant="secondary" className="custom-button" onClick={() => addToWishlist(id)}>
+                    <FaHeart className="button-icon" /> Wishlist
                   </Button>
                 </div>
               </div>
