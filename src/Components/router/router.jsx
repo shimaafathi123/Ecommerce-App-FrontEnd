@@ -19,6 +19,7 @@ import CategoryProductList from "../ProductList/CategoryProductList";
 import UserHome from "../user/userHome";
 import ProLis from "../user/ProductList/productList";
 import CatPro from "../user/ProductList/CategoryProductList";
+import Search from '../Navbar/Search'
 
 function Layout() {
     return (
@@ -114,6 +115,11 @@ function Layout() {
           path:"/user/products/:id",
           element:<ProDe/>
         },
+        
+        {
+          path:"/search",
+          element:<Search/>
+        }
       ],
     },
   ]);

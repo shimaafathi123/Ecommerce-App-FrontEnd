@@ -52,11 +52,16 @@ const Register = () => {
   const validateForm = () => {
     let isValid = true;
 
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
     const errors = {
       full_name: formData.full_name.trim() ? '' : 'Full Name is required',
       email: formData.email.trim() ? (/^\S+@\S+\.\S+$/.test(formData.email) ? '' : 'Email should be in email format') : 'Email is required',
       phone: formData.phone.trim() ? '' : 'Phone is required',
-      password: formData.password.length >= 8 && formData.password.length <= 12 ? '' : 'Password should be between 8 and 12 characters',
+      password: formData.password.length >= 8 && formData.password.length <= 12 
+      ? (passwordRegex.test(formData.password) 
+          ? '' 
+          : 'Password must include at least one uppercase, one lowercase, one number, and one special character.') 
+      : 'Password should be between 8 and 12 characters',
       password2: formData.password2 === formData.password ? '' : 'Passwords do not match',
     };
 
