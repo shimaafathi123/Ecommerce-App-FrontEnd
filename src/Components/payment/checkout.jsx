@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import CustomNavbar from '../Navbar/Navbar';
+// import CustomNavbar from '../Navbar/Navbar';
+import UserNavbar from '../user/userNavbar';
 import * as Yup from 'yup';
 
 const CheckoutForm = () => {
@@ -57,7 +58,7 @@ const CheckoutForm = () => {
 
   return (
     <>
-      <CustomNavbar />
+      <UserNavbar />
       <div className="mt-5 d-flex justify-content-center align-items-center vh-100">
         <form onSubmit={formik.handleSubmit} className='w-75 m-5 border p-5 rounded-2 shadow mx-auto text-center'>
           <h2 className='mb-3 text-danger fw-bold fs-2'>Checkout</h2>

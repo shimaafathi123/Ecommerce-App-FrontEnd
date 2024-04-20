@@ -4,7 +4,8 @@ import CartItem from './CartItem';
 import { clearCart,  removeCartItem, setCart   ,updateCartItemQuantity } from '../../store/cartSlice';
 import { Link } from 'react-router-dom';
 import PaginationComponent from '../pagination/pagination';
-import CustomNavbar from '../Navbar/Navbar';
+// import CustomNavbar from '../Navbar/Navbar';
+import UserNavbar from '../user/userNavbar';
 import { fetchCart, removeFromCart,decreaseItemQuantity,increaseItemQuantity } from '../../axios/cartApi'; // Import removeFromCart function
 
 export default function UserCart() {
@@ -111,7 +112,7 @@ const decreaseQuantity = async (itemId,productId) => {
 
     return (
         <>
-            <CustomNavbar />
+            <UserNavbar />
             <div className="container mt-5">
                 <div className="row justify-content-between align-items-center mt-5">
                     <div className="col-8 mt-5">
