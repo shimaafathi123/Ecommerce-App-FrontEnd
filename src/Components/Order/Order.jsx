@@ -7,7 +7,7 @@ function Order() {
 
     useEffect(() => {
         async function fetchOrders() {
-            const response = await fetch(`https://ecommerce-app-backend-ol18.onrender.com/orders`, {
+            const response = await fetch(`https://ecommerce-app-backend-ol18.onrender.com/orders/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
