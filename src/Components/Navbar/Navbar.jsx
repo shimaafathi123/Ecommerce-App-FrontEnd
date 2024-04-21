@@ -20,7 +20,7 @@ function CustomNavbar() {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/search/?query=${query}`);
+      const response = await axios.get(`https://ecommerce-app-backend-ol18.onrender.com/api/search/?query=${query}`);
       const results = response.data.results;
        
       navigate('/search', { state: { query, results } });
